@@ -13,6 +13,7 @@ import java.awt.event.*;
 public class NewPage extends Panel{
     NewPage()
     {
+        super();
         this.setBackground(Color.white);  
     }
 }
