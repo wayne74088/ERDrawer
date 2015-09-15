@@ -4,14 +4,15 @@
  * and open the template in the editor.
  */
 package erdrawer;
-
+import java.awt.*;
+import java.awt.event.*;
 /**
  *
- * @author User
+ * @author Wayne
  */
-public class ERDrawer {
-    ERDrawer()
+public class NewPage extends Panel{
+    NewPage()
     {
-     new MyWindow();
+        this.setBackground(Color.white);  
     }
 }
