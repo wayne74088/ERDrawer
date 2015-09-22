@@ -4,14 +4,18 @@
  * and open the template in the editor.
  */
 package erdrawer;
-
+import java.util.Vector;
 /**
  *
  * @author User
  */
 public class ERDrawer {
+    Vector<NewPage> pages;
+    NewPage curPage;
     ERDrawer()
     {
-     new MyWindow();
+     MyWindow mywin=new MyWindow(this);
+     pages=new Vector<NewPage>();
+     curPage=null;
     }
 }
