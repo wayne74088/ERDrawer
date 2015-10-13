@@ -10,12 +10,14 @@ import java.util.Vector;
  * @author User
  */
 public class ERDrawer {
-    Vector<NewPage> pages;
-    NewPage curPage;
+    Vector<Page> pages;
+    Page curPage;
+    boolean isPen=false;
+    boolean isLine=false;
     ERDrawer()
     {
      MyWindow mywin=new MyWindow(this);
-     pages=new Vector<NewPage>();
+     pages=new Vector<Page>();
      curPage=null;
     }
 }

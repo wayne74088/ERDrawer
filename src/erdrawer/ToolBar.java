@@ -13,7 +13,7 @@ import java.awt.event.*;
 public class ToolBar extends Panel{
     MyWindow parent;
     
-    Button newPageBtn,nextPageBtn, prevPageBtn, firstPageBtn, lastPageBtn;
+    Button newPageBtn,nextPageBtn, prevPageBtn, firstPageBtn, lastPageBtn,penBtn,lineBtn;
     
     ToolBar(MyWindow p)
     {
@@ -27,8 +27,8 @@ public class ToolBar extends Panel{
                                      {
                                         public void mouseClicked(MouseEvent e)
                                         {
-                                            NewPage np=new NewPage();
-                                            NewPage cp=ToolBar.this.parent.parent.curPage;
+                                            Page np=new Page(ToolBar.this);
+                                            Page cp=ToolBar.this.parent.parent.curPage;
                                             if(cp!=null)
                                             {
                                                 ToolBar.this.parent.remove(cp);
@@ -50,7 +50,7 @@ public class ToolBar extends Panel{
                                         {
                                             public void mouseClicked(MouseEvent e)
                                             {
-                                                NewPage cp=ToolBar.this.parent.parent.curPage;
+                                                Page cp=ToolBar.this.parent.parent.curPage;
                                                 int loc1=ToolBar.this.parent.parent.pages.indexOf(cp);
                                                 if(loc1<=0)
                                                 {
@@ -63,7 +63,7 @@ public class ToolBar extends Panel{
                                                         ToolBar.this.parent.remove(cp);
                                                     }
                                                 
-                                                    NewPage pp=ToolBar.this.parent.parent.pages.elementAt(loc1-1);
+                                                    Page pp=ToolBar.this.parent.parent.pages.elementAt(loc1-1);
                                                     ToolBar.this.parent.add(pp,BorderLayout.CENTER);
                                                     ToolBar.this.parent.mb.updateInfo(pp);
                                                     ToolBar.this.parent.parent.curPage=pp;
@@ -78,7 +78,7 @@ public class ToolBar extends Panel{
                                         {
                                             public void mouseClicked(MouseEvent e)
                                             {
-                                                NewPage cp=ToolBar.this.parent.parent.curPage;
+                                                Page cp=ToolBar.this.parent.parent.curPage;
                                                 int loc1=ToolBar.this.parent.parent.pages.indexOf(cp);
                                                 if(loc1>=(ToolBar.this.parent.parent.pages.size()-1))
                                                 {
@@ -90,7 +90,7 @@ public class ToolBar extends Panel{
                                                     {
                                                         ToolBar.this.parent.remove(cp);
                                                     }
-                                                    NewPage np=ToolBar.this.parent.parent.pages.elementAt(loc1+1);
+                                                    Page np=ToolBar.this.parent.parent.pages.elementAt(loc1+1);
                                                     ToolBar.this.parent.add(np);
                                                     ToolBar.this.parent.mb.updateInfo(np);
                                                     ToolBar.this.parent.parent.curPage=np;
@@ -105,16 +105,19 @@ public class ToolBar extends Panel{
                                         {
                                             public void mouseClicked(MouseEvent e)
                                             {
-                                                NewPage cp=ToolBar.this.parent.parent.curPage;
-                                                if(cp!=null)
+                                                Page cp=ToolBar.this.parent.parent.curPage;
+                                                if(ToolBar.this.parent.parent.pages.size()!=0)
                                                 {
-                                                    ToolBar.this.parent.remove(cp);
+                                                    if(cp!=null)
+                                                    {
+                                                        ToolBar.this.parent.remove(cp);
+                                                    }
+                                                    int loc1=0;
+                                                    Page fp=ToolBar.this.parent.parent.pages.elementAt(loc1);
+                                                    ToolBar.this.parent.add(fp,BorderLayout.CENTER);
+                                                    ToolBar.this.parent.mb.updateInfo(fp);
+                                                    ToolBar.this.parent.parent.curPage=fp;
                                                 }
-                                                int loc1=0;
-                                                NewPage fp=ToolBar.this.parent.parent.pages.elementAt(loc1);
-                                                ToolBar.this.parent.add(fp,BorderLayout.CENTER);
-                                                ToolBar.this.parent.mb.updateInfo(fp);
-                                                ToolBar.this.parent.parent.curPage=fp;
                                             }
                                         }
                                      );
@@ -125,18 +128,63 @@ public class ToolBar extends Panel{
                                         {
                                             public void mouseClicked(MouseEvent e)
                                             {
-                                               NewPage cp=ToolBar.this.parent.parent.curPage;
-                                               if(cp!=null)
-                                               {
-                                                   ToolBar.this.parent.remove(cp);
-                                               }
-                                               int loc1=ToolBar.this.parent.parent.pages.size()-1; 
-                                               NewPage lp=ToolBar.this.parent.parent.pages.elementAt(loc1);
-                                               ToolBar.this.parent.add(lp,BorderLayout.CENTER);
-                                               ToolBar.this.parent.parent.curPage=lp;
-                                               ToolBar.this.parent.mb.updateInfo(lp);
+                                                Page cp=ToolBar.this.parent.parent.curPage;
+                                                if(ToolBar.this.parent.parent.pages.size()!=0)
+                                                {
+                                                    if(cp!=null)
+                                                    {
+                                                        ToolBar.this.parent.remove(cp);
+                                                    }
+                                                    int loc1=ToolBar.this.parent.parent.pages.size()-1; 
+                                                    Page lp=ToolBar.this.parent.parent.pages.elementAt(loc1);
+                                                    ToolBar.this.parent.add(lp,BorderLayout.CENTER);
+                                                    ToolBar.this.parent.parent.curPage=lp;
+                                                    ToolBar.this.parent.mb.updateInfo(lp);
+                                                }
                                             }
                                         }
                                     );
+        penBtn=new Button("Pen");
+        this.add(penBtn);
+        penBtn.addMouseListener(new MouseAdapter()
+                                    {
+                                        public void mouseClicked(MouseEvent e)
+                                        {
+                                            Page cp=ToolBar.this.parent.parent.curPage;
+                                            ToolBar.this.parent.parent.isLine=false;
+                                            if(ToolBar.this.parent.parent.isPen==false)
+                                            {
+                                                ToolBar.this.parent.parent.isPen=true;
+                                                ToolBar.this.parent.mb.updateInfo(cp);
+                                            }
+                                            else if(ToolBar.this.parent.parent.isPen==true)
+                                            {
+                                                ToolBar.this.parent.parent.isPen=false;
+                                                ToolBar.this.parent.mb.updateInfo(cp);
+                                            }
+                                        }
+                                    }
+                                );
+        lineBtn=new Button("Line");
+        this.add(lineBtn);
+        lineBtn.addMouseListener(new MouseAdapter()
+                                    {
+                                        public void mouseClicked(MouseEvent e)
+                                        {
+                                            Page cp=ToolBar.this.parent.parent.curPage;
+                                            ToolBar.this.parent.parent.isPen=false;
+                                            if(ToolBar.this.parent.parent.isLine==false)
+                                            {
+                                                ToolBar.this.parent.parent.isLine=true;
+                                                ToolBar.this.parent.mb.updateInfo(cp);
+                                            }
+                                            else if(ToolBar.this.parent.parent.isLine==true)
+                                            {
+                                                ToolBar.this.parent.parent.isLine=false;
+                                                ToolBar.this.parent.mb.updateInfo(cp);
+                                            }    
+                                        }
+                                    }
+                                );
     }
 }
