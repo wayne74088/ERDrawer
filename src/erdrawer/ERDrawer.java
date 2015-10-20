@@ -12,8 +12,7 @@ import java.util.Vector;
 public class ERDrawer {
     Vector<Page> pages;
     Page curPage;
-    boolean isPen=false;
-    boolean isLine=false;
+    Status status=Status.free;
     ERDrawer()
     {
      MyWindow mywin=new MyWindow(this);

@@ -13,7 +13,7 @@ import java.awt.event.*;
 public class ToolBar extends Panel{
     MyWindow parent;
     
-    Button newPageBtn,nextPageBtn, prevPageBtn, firstPageBtn, lastPageBtn,penBtn,lineBtn;
+    Button newPageBtn,nextPageBtn, prevPageBtn, firstPageBtn, lastPageBtn,penBtn,lineBtn,entitysetBtn;
     
     ToolBar(MyWindow p)
     {
@@ -151,17 +151,16 @@ public class ToolBar extends Panel{
                                         public void mouseClicked(MouseEvent e)
                                         {
                                             Page cp=ToolBar.this.parent.parent.curPage;
-                                            ToolBar.this.parent.parent.isLine=false;
-                                            if(ToolBar.this.parent.parent.isPen==false)
+                                            if(ToolBar.this.parent.parent.status==Status.pen)
                                             {
-                                                ToolBar.this.parent.parent.isPen=true;
+                                                ToolBar.this.parent.parent.status=Status.free;
                                                 ToolBar.this.parent.mb.updateInfo(cp);
                                             }
-                                            else if(ToolBar.this.parent.parent.isPen==true)
+                                            else                                       
                                             {
-                                                ToolBar.this.parent.parent.isPen=false;
+                                                ToolBar.this.parent.parent.status=Status.pen;
                                                 ToolBar.this.parent.mb.updateInfo(cp);
-                                            }
+                                            } 
                                         }
                                     }
                                 );
@@ -172,19 +171,39 @@ public class ToolBar extends Panel{
                                         public void mouseClicked(MouseEvent e)
                                         {
                                             Page cp=ToolBar.this.parent.parent.curPage;
-                                            ToolBar.this.parent.parent.isPen=false;
-                                            if(ToolBar.this.parent.parent.isLine==false)
+                                            if(ToolBar.this.parent.parent.status==Status.line)
                                             {
-                                                ToolBar.this.parent.parent.isLine=true;
+                                                ToolBar.this.parent.parent.status=Status.free;
                                                 ToolBar.this.parent.mb.updateInfo(cp);
                                             }
-                                            else if(ToolBar.this.parent.parent.isLine==true)
+                                            else
                                             {
-                                                ToolBar.this.parent.parent.isLine=false;
+                                                ToolBar.this.parent.parent.status=Status.line;
                                                 ToolBar.this.parent.mb.updateInfo(cp);
-                                            }    
+                                            }
+                                            
                                         }
                                     }
                                 );
+        entitysetBtn=new Button("Entity Set");
+        this.add(entitysetBtn);
+        entitysetBtn.addMouseListener(new MouseAdapter()
+                                        {
+                                            public void mouseClicked(MouseEvent e)
+                                            {
+                                                Page cp=ToolBar.this.parent.parent.curPage;
+                                                if(ToolBar.this.parent.parent.status==Status.entity)
+                                                {
+                                                    ToolBar.this.parent.parent.status=Status.free;
+                                                    ToolBar.this.parent.mb.updateInfo(cp);
+                                                }
+                                                else
+                                                {
+                                                    ToolBar.this.parent.parent.status=Status.entity;
+                                                    ToolBar.this.parent.mb.updateInfo(cp);
+                                                }
+                                            }
+                                        }
+                                     );
     }
 }
