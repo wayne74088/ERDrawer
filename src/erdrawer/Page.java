@@ -64,12 +64,7 @@ public class Page extends Panel{
                                             rects.add(new Line(p1,p2));
                                             if(first!=true)
                                             {
-                                                g.setPaintMode();
-                                                g.setColor(Color.black);
-                                                g.drawLine(p1.x, p1.y, p1.x, p2.y);
-                                                g.drawLine(p1.x, p2.y, p2.x, p2.y);
-                                                g.drawLine(p1.x, p1.y, p2.x, p1.y);
-                                                g.drawLine(p2.x, p1.y, p2.x, p2.y);
+                                                new Rect(Page.this,p1,p2,false);
                                             }
                                         }
                                         else if(Page.this.parent.parent.parent.status==Status.diamond)
@@ -77,12 +72,7 @@ public class Page extends Panel{
                                             diamonds.add(new Line(p1,p2));
                                             if(first!=true)
                                             {
-                                                g.setPaintMode();
-                                                g.setColor(Color.black);
-                                                g.drawLine( p1.x, p1.y, p2.x, (p2.y+p1.y)/2);
-                                                g.drawLine( p1.x, p2.y, p2.x, (p2.y+p1.y)/2);
-                                                g.drawLine( p1.x, p1.y, p1.x+(p1.x-p2.x), (p2.y+p1.y)/2);
-                                                g.drawLine( p1.x, p2.y, p1.x+(p1.x-p2.x), (p2.y+p1.y)/2);
+                                                new Diamond(Page.this,p1,p2,false);
                                             }
                                         }
                                         else if(Page.this.parent.parent.parent.status==Status.oval)
@@ -90,24 +80,7 @@ public class Page extends Panel{
                                             ovals.add(new Line(p1,p2));
                                             if(first!=true)
                                             {
-                                                g.setPaintMode();
-                                                g.setColor(Color.black);
-                                                if((p1.x<p2.x)&&(p1.y<p2.y))
-                                                {
-                                                    g.drawOval(p1.x, p1.y, p2.x-p1.x, p2.y-p1.y);
-                                                }
-                                                else if((p1.x>p2.x)&&(p1.y>p2.y))
-                                                {
-                                                    g.drawOval(p2.x, p2.y, p1.x-p2.x, p1.y-p2.y);
-                                                }
-                                                else if((p1.x>p2.x)&&(p1.y<p2.y))
-                                                {
-                                                    g.drawOval(p2.x, p1.y, p1.x-p2.x, p2.y-p1.y);
-                                                }
-                                                else if((p1.x<p2.x)&&(p1.y>p2.y))
-                                                {
-                                                    g.drawOval(p1.x, p2.y, p2.x-p1.x, p1.y-p2.y);
-                                                }
+                                                new Oval(Page.this,p1,p2,false);
                                             }
                                         }
                                     }
@@ -146,14 +119,9 @@ public class Page extends Panel{
                                             }
                                             else if(Page.this.parent.parent.parent.status==Status.rect)
                                             {
-                                                g.setXORMode(Color.white);
                                                 if(first!=true)
                                                 {
-                                                    //g.setXORMode(Color.white);
-                                                    g.drawLine(p1.x, p1.y, p1.x, p2.y);
-                                                    g.drawLine(p1.x, p2.y, p2.x, p2.y);
-                                                    g.drawLine(p1.x, p1.y, p2.x, p1.y);
-                                                    g.drawLine(p2.x, p1.y, p2.x, p2.y);
+                                                    new Rect(Page.this,p1,p2,true);
                                                 }
                                                 else
                                                 {
@@ -161,20 +129,13 @@ public class Page extends Panel{
                                                 }
                                                 p2.x=e.getX();
                                                 p2.y=e.getY();
-                                                g.drawLine(p1.x, p1.y, p1.x, p2.y);
-                                                g.drawLine(p1.x, p2.y, p2.x, p2.y);
-                                                g.drawLine(p1.x, p1.y, p2.x, p1.y);
-                                                g.drawLine(p2.x, p1.y, p2.x, p2.y);
+                                                new Rect(Page.this,p1,p2,true);
                                             }
                                             else if(Page.this.parent.parent.parent.status==Status.diamond)
                                             {
-                                                g.setXORMode(Color.white);
                                                 if(first!=true)
                                                 {
-                                                    g.drawLine( p1.x, p1.y, p2.x, (p2.y+p1.y)/2);
-                                                    g.drawLine( p1.x, p2.y, p2.x, (p2.y+p1.y)/2);
-                                                    g.drawLine( p1.x, p1.y, p1.x+(p1.x-p2.x), (p2.y+p1.y)/2);
-                                                    g.drawLine( p1.x, p2.y, p1.x+(p1.x-p2.x), (p2.y+p1.y)/2);
+                                                    new Diamond(Page.this,p1,p2,true);
                                                 }
                                                 else
                                                 {
@@ -182,32 +143,14 @@ public class Page extends Panel{
                                                 }
                                                 p2.x=e.getX();
                                                 p2.y=e.getY();
-                                                g.drawLine( p1.x, p1.y, p2.x, (p2.y+p1.y)/2);
-                                                g.drawLine( p1.x, p2.y, p2.x, (p2.y+p1.y)/2);
-                                                g.drawLine( p1.x, p1.y, p1.x+(p1.x-p2.x), (p2.y+p1.y)/2);
-                                                g.drawLine( p1.x, p2.y, p1.x+(p1.x-p2.x), (p2.y+p1.y)/2);
+                                                new Diamond(Page.this,p1,p2,true);
                                             }
                                             else if(Page.this.parent.parent.parent.status==Status.oval)
                                             {
                                                 g.setXORMode(Color.white);
                                                 if(first!=true)
                                                 {
-                                                    if((p1.x<p2.x)&&(p1.y<p2.y))
-                                                    {
-                                                        g.drawOval(p1.x, p1.y, p2.x-p1.x, p2.y-p1.y);
-                                                    }
-                                                    else if((p1.x>p2.x)&&(p1.y>p2.y))
-                                                    {
-                                                        g.drawOval(p2.x, p2.y, p1.x-p2.x, p1.y-p2.y);
-                                                    }
-                                                    else if((p1.x>p2.x)&&(p1.y<p2.y))
-                                                    {
-                                                        g.drawOval(p2.x, p1.y, p1.x-p2.x, p2.y-p1.y);
-                                                    }
-                                                    else if((p1.x<p2.x)&&(p1.y>p2.y))
-                                                    {
-                                                        g.drawOval(p1.x, p2.y, p2.x-p1.x, p1.y-p2.y);
-                                                    }
+                                                    new Oval(Page.this,p1,p2,true);                                                  
                                                 }
                                                 else
                                                 {
@@ -215,22 +158,7 @@ public class Page extends Panel{
                                                 }
                                                 p2.x=e.getX();
                                                 p2.y=e.getY();
-                                                if((p1.x<p2.x)&&(p1.y<p2.y))
-                                                {
-                                                    g.drawOval(p1.x, p1.y, p2.x-p1.x, p2.y-p1.y);
-                                                }
-                                                else if((p1.x>p2.x)&&(p1.y>p2.y))
-                                                {
-                                                    g.drawOval(p2.x, p2.y, p1.x-p2.x, p1.y-p2.y);
-                                                }
-                                                else if((p1.x>p2.x)&&(p1.y<p2.y))
-                                                {
-                                                    g.drawOval(p2.x, p1.y, p1.x-p2.x, p2.y-p1.y);
-                                                }
-                                                else if((p1.x<p2.x)&&(p1.y>p2.y))
-                                                {
-                                                    g.drawOval(p1.x, p2.y, p2.x-p1.x, p1.y-p2.y);
-                                                }
+                                                new Oval(Page.this,p1,p2,true);                                               
                                             }
                                         }
                                     }
@@ -244,36 +172,15 @@ public class Page extends Panel{
         }
         for(Line i : rects)
         {
-            g.drawLine(i.start.x, i.start.y, i.start.x, i.end.y);
-            g.drawLine(i.start.x, i.end.y, i.end.x, i.end.y);
-            g.drawLine(i.start.x, i.start.y, i.end.x, i.start.y);
-            g.drawLine(i.end.x, i.start.y, i.end.x, i.end.y);
+            new Rect(Page.this,i.start,i.end,false);
         }
         for(Line i : diamonds)
         {
-            g.drawLine( i.start.x, i.start.y, i.end.x, (i.end.y+i.start.y)/2);
-            g.drawLine( i.start.x, i.end.y, i.end.x, (i.end.y+i.start.y)/2);
-            g.drawLine( i.start.x, i.start.y, i.start.x+(i.start.x-i.end.x), (i.end.y+i.start.y)/2);
-            g.drawLine( i.start.x, i.end.y, i.start.x+(i.start.x-i.end.x), (i.end.y+i.start.y)/2);
+            new Diamond(Page.this,i.start,i.end,false);
         }
         for(Line i : ovals)
         {
-            if((i.start.x<i.end.x)&&(i.start.y<i.end.y))
-            {
-                g.drawOval(i.start.x, i.start.y, i.end.x-i.start.x, i.end.y-i.start.y);
-            }
-            else if((i.start.x>i.end.x)&&(i.start.y>i.end.y))
-            {
-                g.drawOval(i.end.x, i.end.y, i.start.x-i.end.x, i.start.y-i.end.y);
-            }
-            else if((i.start.x>i.end.x)&&(i.start.y<i.end.y))
-            {
-                g.drawOval(i.end.x, i.start.y, i.start.x-i.end.x, i.end.y-i.start.y);
-            }
-            else if((i.start.x<i.end.x)&&(i.start.y>i.end.y))
-            {
-                g.drawOval(i.start.x, i.end.y, i.end.x-i.start.x, i.start.y-i.end.y);
-            }
+            new Oval(Page.this,i.start,i.end,false);
         }
     }
 }
