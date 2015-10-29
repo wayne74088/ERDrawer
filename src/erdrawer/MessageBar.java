@@ -17,12 +17,12 @@ public class MessageBar extends Panel{
     {
         super();
         this.setBackground(Color.LIGHT_GRAY);
-        this.setLayout(new FlowLayout(FlowLayout.RIGHT));
+        this.setLayout(new BorderLayout());
         parent=p;
-        cursorInfo=new Label("NULL");
-        this.add(cursorInfo);
+        cursorInfo=new Label("--NULL--");
+        this.add(cursorInfo,BorderLayout.WEST);
         pageInfo=new Label("0/0");
-        this.add(pageInfo);
+        this.add(pageInfo,BorderLayout.EAST);
         
     }
     void updateInfo(Page p)
@@ -42,13 +42,21 @@ public class MessageBar extends Panel{
             {
                 cursorInfo.setText("Line");
             }
-            else if(this.parent.parent.status==Status.entity)
+            else if(this.parent.parent.status==Status.rect)
             {
-                cursorInfo.setText("Entity");
+                cursorInfo.setText("Rect");
+            }
+            else if(this.parent.parent.status==Status.diamond)
+            {
+                cursorInfo.setText("Diamond");
+            }
+            else if(this.parent.parent.status==Status.oval)
+            {
+                cursorInfo.setText("Oval");
             }
             else if(this.parent.parent.status==Status.free)
             {
-                cursorInfo.setText("NULL");
+                cursorInfo.setText("--NULL--");
             }
         }
     }
