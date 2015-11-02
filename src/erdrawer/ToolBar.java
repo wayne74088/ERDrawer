@@ -6,15 +6,16 @@
 package erdrawer;
 import java.awt.*;
 import java.awt.event.*;
+import javax.swing.JColorChooser;
 /**
  *
  * @author Wayne
  */
+
 public class ToolBar extends Panel{
     MyWindow parent;
-    
-    Button newPageBtn,nextPageBtn, prevPageBtn, firstPageBtn, lastPageBtn,penBtn,lineBtn,entitysetBtn,rectBtn,diamondBtn,ovalBtn;
-    
+    Color color=Color.black;
+    Button newPageBtn,nextPageBtn, prevPageBtn, firstPageBtn, lastPageBtn,penBtn,lineBtn,entitysetBtn,rectBtn,diamondBtn,ovalBtn,setColorBtn;
     ToolBar(MyWindow p)
     {
         super();
@@ -164,6 +165,7 @@ public class ToolBar extends Panel{
                                         }
                                     }
                                 );
+        
         lineBtn=new Button("Line");
         this.add(lineBtn);
         lineBtn.addMouseListener(new MouseAdapter()
@@ -245,5 +247,20 @@ public class ToolBar extends Panel{
                                                 }
                                             }
                                    );
+        setColorBtn=new Button("SetColor");
+        this.add(setColorBtn);
+        setColorBtn.addMouseListener(new MouseAdapter()
+                                            {
+                                                public void mouseClicked(MouseEvent e)
+                                                {
+                                                    System.out.println(color);
+                                                    color = JColorChooser.showDialog( null, "Select Color", color);
+                                                    if(color==null)
+                                                    {
+                                                        color=Color.black;
+                                                    }
+                                                }
+                                            }
+                                    );
     }
 }

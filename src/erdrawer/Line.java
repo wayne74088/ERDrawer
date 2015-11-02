@@ -11,10 +11,12 @@ import java.awt.*;
  */
 public class Line {
     Point start,end;
-    Line(Point s,Point e)
+    Color color;
+    Line( Point s, Point e, Color c)
     {
         start=new Point(s);
         end=new Point(e);
+        color=c;
     }
 
 }

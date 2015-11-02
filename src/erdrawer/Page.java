@@ -28,6 +28,7 @@ public class Page extends Panel{
         p2=new Point();
         first=true;
         this.setBackground(Color.white);  
+        System.out.println(this.getBackground());
         this.addMouseListener(new MouseAdapter()
                                 {
                                     public void mousePressed(MouseEvent e)
@@ -51,36 +52,37 @@ public class Page extends Panel{
                                         if(Page.this.parent.parent.parent.status==Status.line)
                                         {
                                             
-                                            Lines.add(new Line(p1,p2));
+                                            Lines.add(new Line(p1,p2,Page.this.parent.color));
+                                            
                                             if(first!=true)
                                             {
                                                 g.setPaintMode();
-                                                g.setColor(Color.black);
+                                                g.setColor(Page.this.parent.color);
                                                 g.drawLine(p1.x, p1.y, p2.x, p2.y);
                                             }
                                         }
                                         else if(Page.this.parent.parent.parent.status==Status.rect)
                                         {
-                                            rects.add(new Line(p1,p2));
+                                            rects.add(new Line(p1,p2,Page.this.parent.color));
                                             if(first!=true)
                                             {
-                                                new Rect(Page.this,p1,p2,false);
+                                                new Rect(Page.this,p1,p2,false,Page.this.parent.color);
                                             }
                                         }
                                         else if(Page.this.parent.parent.parent.status==Status.diamond)
                                         {
-                                            diamonds.add(new Line(p1,p2));
+                                            diamonds.add(new Line(p1,p2,Page.this.parent.color));
                                             if(first!=true)
                                             {
-                                                new Diamond(Page.this,p1,p2,false);
+                                                new Diamond(Page.this,p1,p2,false,Page.this.parent.color);
                                             }
                                         }
                                         else if(Page.this.parent.parent.parent.status==Status.oval)
                                         {
-                                            ovals.add(new Line(p1,p2));
+                                            ovals.add(new Line(p1,p2,Page.this.parent.color));
                                             if(first!=true)
                                             {
-                                                new Oval(Page.this,p1,p2,false);
+                                                new Oval(Page.this,p1,p2,false,Page.this.parent.color);
                                             }
                                         }
                                     }
@@ -93,16 +95,18 @@ public class Page extends Panel{
                                             Graphics g=Page.this.getGraphics();
                                             if(Page.this.parent.parent.parent.status==Status.pen)
                                             {
+                                                g.setColor(Page.this.parent.color);
                                                 p2.x=e.getX();
                                                 p2.y=e.getY();
                                                 g.drawLine(p1.x, p1.y, p2.x, p2.y);
-                                                Lines.add(new Line(p1,p2));
+                                                Lines.add(new Line(p1,p2,Page.this.parent.color));
                                                 p1.x=p2.x;
                                                 p1.y=p2.y;
                                             }
                                             else if(Page.this.parent.parent.parent.status==Status.line)
                                             {      
-                                                g.setXORMode(Color.white);
+                                                Color colorline=new Color (Page.this.parent.color.getRed()^Page.this.getBackground().getRed(), Page.this.parent.color.getGreen()^Page.this.getBackground().getGreen(), Page.this.parent.color.getBlue()^Page.this.getBackground().getBlue());
+                                                g.setXORMode(colorline);
                                                 if(first!=true)
                                                 {
                                                     //g.setXORMode(Color.white);
@@ -121,7 +125,7 @@ public class Page extends Panel{
                                             {
                                                 if(first!=true)
                                                 {
-                                                    new Rect(Page.this,p1,p2,true);
+                                                    new Rect(Page.this,p1,p2,true,Page.this.parent.color);
                                                 }
                                                 else
                                                 {
@@ -129,13 +133,13 @@ public class Page extends Panel{
                                                 }
                                                 p2.x=e.getX();
                                                 p2.y=e.getY();
-                                                new Rect(Page.this,p1,p2,true);
+                                                new Rect(Page.this,p1,p2,true,Page.this.parent.color);
                                             }
                                             else if(Page.this.parent.parent.parent.status==Status.diamond)
                                             {
                                                 if(first!=true)
                                                 {
-                                                    new Diamond(Page.this,p1,p2,true);
+                                                    new Diamond(Page.this,p1,p2,true,Page.this.parent.color);
                                                 }
                                                 else
                                                 {
@@ -143,14 +147,14 @@ public class Page extends Panel{
                                                 }
                                                 p2.x=e.getX();
                                                 p2.y=e.getY();
-                                                new Diamond(Page.this,p1,p2,true);
+                                                new Diamond(Page.this,p1,p2,true,Page.this.parent.color);
                                             }
                                             else if(Page.this.parent.parent.parent.status==Status.oval)
                                             {
                                                 g.setXORMode(Color.white);
                                                 if(first!=true)
                                                 {
-                                                    new Oval(Page.this,p1,p2,true);                                                  
+                                                    new Oval(Page.this,p1,p2,true,Page.this.parent.color);                                                  
                                                 }
                                                 else
                                                 {
@@ -158,7 +162,7 @@ public class Page extends Panel{
                                                 }
                                                 p2.x=e.getX();
                                                 p2.y=e.getY();
-                                                new Oval(Page.this,p1,p2,true);                                               
+                                                new Oval(Page.this,p1,p2,true,Page.this.parent.color);                                               
                                             }
                                         }
                                     }
@@ -168,19 +172,20 @@ public class Page extends Panel{
     {
         for(Line i : Lines)
         {
+            g.setColor(i.color);
             g.drawLine(i.start.x, i.start.y, i.end.x, i.end.y);          
         }
         for(Line i : rects)
         {
-            new Rect(Page.this,i.start,i.end,false);
+            new Rect(Page.this,i.start,i.end,false,i.color);
         }
         for(Line i : diamonds)
         {
-            new Diamond(Page.this,i.start,i.end,false);
+            new Diamond(Page.this,i.start,i.end,false,i.color);
         }
         for(Line i : ovals)
         {
-            new Oval(Page.this,i.start,i.end,false);
+            new Oval(Page.this,i.start,i.end,false,i.color);
         }
     }
 }

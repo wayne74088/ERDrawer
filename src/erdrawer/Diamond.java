@@ -13,13 +13,15 @@ import java.util.Vector;
  */
 public class Diamond {
     Page parent;
-    Diamond(Page p,Point p1,Point p2,boolean b)
+    Diamond(Page p,Point p1,Point p2,boolean b,Color c)
     {
         parent = p;
+        Color color;
         Graphics g=this.parent.getGraphics();
         if(b==true)
         {
-            g.setXORMode(Color.white);
+            color=new Color(this.parent.getBackground().getRed()^c.getRed(),this.parent.getBackground().getGreen()^c.getGreen(),this.parent.getBackground().getBlue()^c.getBlue());
+            g.setXORMode(color);
             g.drawLine( p1.x, p1.y, p2.x, (p2.y+p1.y)/2);
             g.drawLine( p1.x, p2.y, p2.x, (p2.y+p1.y)/2);
             g.drawLine( p1.x, p1.y, p1.x+(p1.x-p2.x), (p2.y+p1.y)/2);
@@ -28,7 +30,7 @@ public class Diamond {
         else if(b==false)
         {
             g.setPaintMode();
-            g.setColor(Color.black);
+            g.setColor(c);
             g.drawLine( p1.x, p1.y, p2.x, (p2.y+p1.y)/2);
             g.drawLine( p1.x, p2.y, p2.x, (p2.y+p1.y)/2);
             g.drawLine( p1.x, p1.y, p1.x+(p1.x-p2.x), (p2.y+p1.y)/2);
