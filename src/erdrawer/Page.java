@@ -15,15 +15,13 @@ public class Page extends Panel{
     ToolBar parent;
     Point p1,p2;
     boolean first;
-    Vector<Line> Lines,rects,diamonds,ovals;
+    Vector<Line> Lines;
     Page(ToolBar p)
     {
         super();       
         parent=p;
         Lines =new Vector<Line>();
-        rects=new Vector<Line>();
-        diamonds=new Vector<Line>();
-        ovals=new Vector<Line>();
+        this.setLayout(null);
         p1=new Point();
         p2=new Point();
         first=true;
@@ -63,27 +61,90 @@ public class Page extends Panel{
                                         }
                                         else if(Page.this.parent.parent.parent.status==Status.rect)
                                         {
-                                            rects.add(new Line(p1,p2,Page.this.parent.color));
-                                            if(first!=true)
+                                        if(first!=true)
+                                        {
+                                            Entityset Entity=new Entityset(Page.this.parent.color);
+                                            if((p1.x<p2.x)&&(p1.y<p2.y))
                                             {
-                                                new Rect(Page.this,p1,p2,false,Page.this.parent.color);
+                                                Entity.setSize(p2.x-p1.x,p2.y-p1.y);
+                                                Entity.setLocation(p1.x, p1.y);
                                             }
+                                            else if((p1.x>p2.x)&&(p1.y>p2.y))
+                                            {
+                                                Entity.setSize(p1.x-p2.x,p1.y-p2.y);
+                                                Entity.setLocation(p2.x, p2.y);
+                                            }
+                                            else if((p1.x>p2.x)&&(p1.y<p2.y))
+                                            {
+                                                Entity.setSize(p1.x-p2.x,p2.y-p1.y);
+                                                Entity.setLocation(p2.x, p1.y);
+                                            }
+                                            else if((p1.x<p2.x)&&(p1.y>p2.y))
+                                            {
+                                                Entity.setSize(p2.x-p1.x,p1.y-p2.y);
+                                                Entity.setLocation(p1.x, p2.y);
+                                            }
+                                            Page.this.add(Entity);
+                                            Page.this.repaint();
+                                        }
                                         }
                                         else if(Page.this.parent.parent.parent.status==Status.diamond)
                                         {
-                                            diamonds.add(new Line(p1,p2,Page.this.parent.color));
-                                            if(first!=true)
+                                        if(first!=true)
+                                        {
+                                            Relationship Relation=new Relationship(Page.this.parent.color);
+                                            if((p1.x<p2.x)&&(p1.y<p2.y))
                                             {
-                                                new Diamond(Page.this,p1,p2,false,Page.this.parent.color);
+                                                Relation.setSize(p2.x-p1.x,p2.y-p1.y);
+                                                Relation.setLocation(p1.x, p1.y);
                                             }
+                                            else if((p1.x>p2.x)&&(p1.y>p2.y))
+                                            {
+                                                Relation.setSize(p1.x-p2.x,p1.y-p2.y);
+                                                Relation.setLocation(p2.x, p2.y);
+                                            }
+                                            else if((p1.x>p2.x)&&(p1.y<p2.y))
+                                            {
+                                                Relation.setSize(p1.x-p2.x,p2.y-p1.y);
+                                                Relation.setLocation(p2.x, p1.y);
+                                            }
+                                            else if((p1.x<p2.x)&&(p1.y>p2.y))
+                                            {
+                                                Relation.setSize(p2.x-p1.x,p1.y-p2.y);
+                                                Relation.setLocation(p1.x, p2.y);
+                                            }
+                                            Page.this.add(Relation);
+                                            Page.this.repaint();
+                                        }
                                         }
                                         else if(Page.this.parent.parent.parent.status==Status.oval)
                                         {
-                                            ovals.add(new Line(p1,p2,Page.this.parent.color));
-                                            if(first!=true)
+                                        if(first!=true)
+                                        {
+                                            Attribute attributen=new Attribute(Page.this.parent.color);
+                                            if((p1.x<p2.x)&&(p1.y<p2.y))
                                             {
-                                                new Oval(Page.this,p1,p2,false,Page.this.parent.color);
+                                                attributen.setSize(p2.x-p1.x,p2.y-p1.y);
+                                                attributen.setLocation(p1.x, p1.y);
                                             }
+                                            else if((p1.x>p2.x)&&(p1.y>p2.y))
+                                            {
+                                                attributen.setSize(p1.x-p2.x,p1.y-p2.y);
+                                                attributen.setLocation(p2.x, p2.y);
+                                            }
+                                            else if((p1.x>p2.x)&&(p1.y<p2.y))
+                                            {
+                                                attributen.setSize(p1.x-p2.x,p2.y-p1.y);
+                                                attributen.setLocation(p2.x, p1.y);
+                                            }
+                                            else if((p1.x<p2.x)&&(p1.y>p2.y))
+                                            {
+                                                attributen.setSize(p2.x-p1.x,p1.y-p2.y);
+                                                attributen.setLocation(p1.x, p2.y);
+                                            }
+                                            Page.this.add(attributen);
+                                            Page.this.repaint();
+                                        }
                                         }
                                     }
                                 }
@@ -125,7 +186,7 @@ public class Page extends Panel{
                                             {
                                                 if(first!=true)
                                                 {
-                                                    new Rect(Page.this,p1,p2,true,Page.this.parent.color);
+                                                    new Rect(Page.this,p1,p2,Page.this.parent.color);
                                                 }
                                                 else
                                                 {
@@ -133,13 +194,13 @@ public class Page extends Panel{
                                                 }
                                                 p2.x=e.getX();
                                                 p2.y=e.getY();
-                                                new Rect(Page.this,p1,p2,true,Page.this.parent.color);
+                                                new Rect(Page.this,p1,p2,Page.this.parent.color);
                                             }
                                             else if(Page.this.parent.parent.parent.status==Status.diamond)
                                             {
                                                 if(first!=true)
                                                 {
-                                                    new Diamond(Page.this,p1,p2,true,Page.this.parent.color);
+                                                    new Diamond(Page.this,p1,p2,Page.this.parent.color);
                                                 }
                                                 else
                                                 {
@@ -147,7 +208,7 @@ public class Page extends Panel{
                                                 }
                                                 p2.x=e.getX();
                                                 p2.y=e.getY();
-                                                new Diamond(Page.this,p1,p2,true,Page.this.parent.color);
+                                                new Diamond(Page.this,p1,p2,Page.this.parent.color);
                                             }
                                             else if(Page.this.parent.parent.parent.status==Status.oval)
                                             {
@@ -170,22 +231,11 @@ public class Page extends Panel{
     }
     public void paint(Graphics g)
     {
+        super.paint(g);
         for(Line i : Lines)
         {
             g.setColor(i.color);
             g.drawLine(i.start.x, i.start.y, i.end.x, i.end.y);          
-        }
-        for(Line i : rects)
-        {
-            new Rect(Page.this,i.start,i.end,false,i.color);
-        }
-        for(Line i : diamonds)
-        {
-            new Diamond(Page.this,i.start,i.end,false,i.color);
-        }
-        for(Line i : ovals)
-        {
-            new Oval(Page.this,i.start,i.end,false,i.color);
         }
     }
 }

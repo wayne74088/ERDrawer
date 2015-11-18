@@ -14,7 +14,7 @@ import javax.swing.JColorChooser;
 
 public class ToolBar extends Panel{
     MyWindow parent;
-    Color color=Color.black;
+    Color color=Color.black,color1;
     Button newPageBtn,nextPageBtn, prevPageBtn, firstPageBtn, lastPageBtn,penBtn,lineBtn,entitysetBtn,rectBtn,diamondBtn,ovalBtn,setColorBtn;
     ToolBar(MyWindow p)
     {
@@ -68,6 +68,7 @@ public class ToolBar extends Panel{
                                                     ToolBar.this.parent.add(pp,BorderLayout.CENTER);
                                                     ToolBar.this.parent.mb.updateInfo(pp);
                                                     ToolBar.this.parent.parent.curPage=pp;
+                                                    pp.revalidate();
                                                 }
                                             }
                                         }
@@ -95,6 +96,7 @@ public class ToolBar extends Panel{
                                                     ToolBar.this.parent.add(np);
                                                     ToolBar.this.parent.mb.updateInfo(np);
                                                     ToolBar.this.parent.parent.curPage=np;
+                                                    np.revalidate();
                                                 }
                                             }
                                         }
@@ -118,6 +120,7 @@ public class ToolBar extends Panel{
                                                     ToolBar.this.parent.add(fp,BorderLayout.CENTER);
                                                     ToolBar.this.parent.mb.updateInfo(fp);
                                                     ToolBar.this.parent.parent.curPage=fp;
+                                                    fp.revalidate();
                                                 }
                                             }
                                         }
@@ -141,6 +144,7 @@ public class ToolBar extends Panel{
                                                     ToolBar.this.parent.add(lp,BorderLayout.CENTER);
                                                     ToolBar.this.parent.parent.curPage=lp;
                                                     ToolBar.this.parent.mb.updateInfo(lp);
+                                                    lp.revalidate();
                                                 }
                                             }
                                         }
@@ -253,11 +257,11 @@ public class ToolBar extends Panel{
                                             {
                                                 public void mouseClicked(MouseEvent e)
                                                 {
-                                                    System.out.println(color);
+                                                    color1=color;
                                                     color = JColorChooser.showDialog( null, "Select Color", color);
                                                     if(color==null)
                                                     {
-                                                        color=Color.black;
+                                                        color=color1;
                                                     }
                                                 }
                                             }
