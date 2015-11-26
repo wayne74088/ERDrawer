@@ -10,5 +10,5 @@ package erdrawer;
  * @author Wayne
  */
 public enum Status {
-    free,pen,line,rect,diamond,oval
+    free,pen,line,rect,diamond,oval,actived,idle
 }

@@ -12,8 +12,9 @@ import java.awt.event.*;
  */
 public class Entityset extends OBJ{
     Color color1;
-    Entityset(Color c)
+    Entityset(Color c,Page p)
     {
+        super(p);
         color1=c;
     }
     public void paint(Graphics g)

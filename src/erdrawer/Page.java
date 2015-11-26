@@ -16,17 +16,21 @@ public class Page extends Panel{
     Point p1,p2;
     boolean first;
     Vector<Line> Lines;
+    Vector<OBJ> objects;
+    OBJ activeOBJ=null;
+    ControlPoints cp;
     Page(ToolBar p)
     {
         super();       
-        parent=p;
-        Lines =new Vector<Line>();
+        parent = p;
+        Lines = new Vector<Line>();
+        objects = new Vector<OBJ>();
+        cp=new ControlPoints(Page.this);
         this.setLayout(null);
         p1=new Point();
         p2=new Point();
-        first=true;
-        this.setBackground(Color.white);  
-        System.out.println(this.getBackground());
+        first=true;       
+        this.setBackground(Color.white); 
         this.addMouseListener(new MouseAdapter()
                                 {
                                     public void mousePressed(MouseEvent e)
@@ -63,7 +67,7 @@ public class Page extends Panel{
                                         {
                                         if(first!=true)
                                         {
-                                            Entityset Entity=new Entityset(Page.this.parent.color);
+                                            Entityset Entity=new Entityset(Page.this.parent.color,Page.this);
                                             if((p1.x<p2.x)&&(p1.y<p2.y))
                                             {
                                                 Entity.setSize(p2.x-p1.x,p2.y-p1.y);
@@ -85,6 +89,12 @@ public class Page extends Panel{
                                                 Entity.setLocation(p1.x, p2.y);
                                             }
                                             Page.this.add(Entity);
+                                            objects.add(Entity);
+                                            if(Page.this.activeOBJ!=null)
+                                            {
+                                                activeOBJ.status=Status.idle;
+                                            }
+                                            Page.this.activeOBJ=Entity;
                                             Page.this.repaint();
                                         }
                                         }
@@ -92,7 +102,7 @@ public class Page extends Panel{
                                         {
                                         if(first!=true)
                                         {
-                                            Relationship Relation=new Relationship(Page.this.parent.color);
+                                            Relationship Relation=new Relationship(Page.this.parent.color,Page.this);
                                             if((p1.x<p2.x)&&(p1.y<p2.y))
                                             {
                                                 Relation.setSize(p2.x-p1.x,p2.y-p1.y);
@@ -114,6 +124,12 @@ public class Page extends Panel{
                                                 Relation.setLocation(p1.x, p2.y);
                                             }
                                             Page.this.add(Relation);
+                                            objects.add(Relation);
+                                            if(Page.this.activeOBJ!=null)
+                                            {
+                                                activeOBJ.status=Status.idle;
+                                            }
+                                            Page.this.activeOBJ=Relation;
                                             Page.this.repaint();
                                         }
                                         }
@@ -121,7 +137,7 @@ public class Page extends Panel{
                                         {
                                         if(first!=true)
                                         {
-                                            Attribute attributen=new Attribute(Page.this.parent.color);
+                                            Attribute attributen=new Attribute(Page.this.parent.color,Page.this);
                                             if((p1.x<p2.x)&&(p1.y<p2.y))
                                             {
                                                 attributen.setSize(p2.x-p1.x,p2.y-p1.y);
@@ -143,6 +159,12 @@ public class Page extends Panel{
                                                 attributen.setLocation(p1.x, p2.y);
                                             }
                                             Page.this.add(attributen);
+                                            objects.add(attributen);
+                                            if(Page.this.activeOBJ!=null)
+                                            {
+                                                activeOBJ.status=Status.idle;
+                                            }
+                                            Page.this.activeOBJ=attributen;
                                             Page.this.repaint();
                                         }
                                         }
@@ -215,7 +237,7 @@ public class Page extends Panel{
                                                 g.setXORMode(Color.white);
                                                 if(first!=true)
                                                 {
-                                                    new Oval(Page.this,p1,p2,true,Page.this.parent.color);                                                  
+                                                    new Oval(Page.this,p1,p2,Page.this.parent.color);                                                  
                                                 }
                                                 else
                                                 {
@@ -223,19 +245,36 @@ public class Page extends Panel{
                                                 }
                                                 p2.x=e.getX();
                                                 p2.y=e.getY();
-                                                new Oval(Page.this,p1,p2,true,Page.this.parent.color);                                               
+                                                new Oval(Page.this,p1,p2,Page.this.parent.color);                                               
                                             }
                                         }
                                     }
                                    );
     }
+
     public void paint(Graphics g)
-    {
+    {       
         super.paint(g);
         for(Line i : Lines)
         {
             g.setColor(i.color);
             g.drawLine(i.start.x, i.start.y, i.end.x, i.end.y);          
         }
+        
+        if(activeOBJ!=null)
+        {
+            
+            g.setXORMode(Color.white);
+            Point p=activeOBJ.getLocation();
+            Dimension d=activeOBJ.getSize();
+            g.drawRect(p.x-5,p.y-5,d.width+10,d.height+10);
+            cp.a();
+            cp.c(true);
+        }
+        else
+        {
+           cp.c(false);
+        }
+
     }
 }

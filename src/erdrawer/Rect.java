@@ -11,7 +11,7 @@ import java.util.Vector;
  *
  * @author Wayne
  */
-public class Rect extends OBJ{
+public class Rect{
     Page parent;
     Rect(Page p,Point p1,Point p2,Color c)
     {

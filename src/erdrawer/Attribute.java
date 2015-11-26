@@ -13,8 +13,9 @@ import java.awt.Event.*;
  */
 public class Attribute extends OBJ{
     Color color1;
-    Attribute(Color c)
+    Attribute(Color c,Page p)
     {
+        super(p);
         color1=c;
     }
     public void paint(Graphics g)
