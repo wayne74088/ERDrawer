@@ -14,28 +14,37 @@ import java.util.Vector;
 public class Page extends Panel{
     ToolBar parent;
     Point p1,p2;
-    boolean first;
+    boolean first,First;
     Vector<Line> Lines;
     Vector<OBJ> objects;
-    OBJ activeOBJ=null;
+    OBJ activeOBJ;
     ControlPoints cp;
     Page(ToolBar p)
     {
         super();       
         parent = p;
+        First=true;
         Lines = new Vector<Line>();
         objects = new Vector<OBJ>();
         cp=new ControlPoints(Page.this);
         this.setLayout(null);
         p1=new Point();
         p2=new Point();
-        first=true;       
+        first=true;
+        activeOBJ=new OBJ(Page.this);
+        activeOBJ=null;
         this.setBackground(Color.white); 
         this.addMouseListener(new MouseAdapter()
                                 {
+                                    
                                     public void mousePressed(MouseEvent e)
                                     {
-                                        
+                                        if(activeOBJ!=null)
+                                        {
+                                            activeOBJ.status=Status.idle;
+                                            activeOBJ=null;
+                                        }
+                                        Page.this.repaint();
                                         if((Page.this.parent.parent.parent.status==Status.pen)||
                                            (Page.this.parent.parent.parent.status==Status.line)||
                                            (Page.this.parent.parent.parent.status==Status.rect)||
@@ -46,11 +55,13 @@ public class Page extends Panel{
                                             p1.x=e.getX();
                                             p1.y=e.getY();  
                                         }
+                                        
                                     }
                                     
                                     public void mouseReleased(MouseEvent e)
                                     {
                                         Graphics g=Page.this.getGraphics();
+
                                         if(Page.this.parent.parent.parent.status==Status.line)
                                         {
                                             
@@ -63,7 +74,9 @@ public class Page extends Panel{
                                                 g.drawLine(p1.x, p1.y, p2.x, p2.y);
                                             }
                                         }
-                                        else if(Page.this.parent.parent.parent.status==Status.rect)
+                                        else
+                                        {
+                                        if(Page.this.parent.parent.parent.status==Status.rect)
                                         {
                                         if(first!=true)
                                         {
@@ -165,9 +178,15 @@ public class Page extends Panel{
                                                 activeOBJ.status=Status.idle;
                                             }
                                             Page.this.activeOBJ=attributen;
+                                            
                                             Page.this.repaint();
                                         }
+                                        }         
+                                        if(activeOBJ!=null)
+                                        {
+                                            activeOBJ.status=Status.actived;
                                         }
+                                        }   
                                     }
                                 }
                              );
@@ -263,18 +282,21 @@ public class Page extends Panel{
         
         if(activeOBJ!=null)
         {
-            
+            cp.a();
+            cp.c(true);
             g.setXORMode(Color.white);
             Point p=activeOBJ.getLocation();
             Dimension d=activeOBJ.getSize();
-            g.drawRect(p.x-5,p.y-5,d.width+10,d.height+10);
-            cp.a();
-            cp.c(true);
+            //g.drawRect(p.x-5,p.y-5,d.width+10,d.height+10);
+            g.drawLine(p.x-5,p.y-5,p.x-5+d.width+10,p.y-5);
+            g.drawLine(p.x-5+d.width+10,p.y-5,p.x-5+d.width+10,p.y-5+d.height+10);
+            g.drawLine(p.x-5+d.width+10,p.y-5+d.height+10,p.x-5,p.y-5+d.height+10);
+            g.drawLine(p.x-5,p.y-5,p.x-5,p.y-5+d.height+10);
         }
         else
         {
-           cp.c(false);
+            cp.c(false);
         }
-
+        
     }
 }
