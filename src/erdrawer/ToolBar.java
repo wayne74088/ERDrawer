@@ -15,7 +15,7 @@ import javax.swing.JColorChooser;
 public class ToolBar extends Panel{
     MyWindow parent;
     Color color=Color.black,color1;
-    Button newPageBtn,nextPageBtn, prevPageBtn, firstPageBtn, lastPageBtn,penBtn,lineBtn,entitysetBtn,rectBtn,diamondBtn,ovalBtn,setColorBtn;
+    Button newPageBtn,nextPageBtn, prevPageBtn, firstPageBtn, lastPageBtn,penBtn,lineBtn,entitysetBtn,rectBtn,diamondBtn,ovalBtn,setColorBtn,DeleteBtn;
     ToolBar(MyWindow p)
     {
         super();
@@ -266,5 +266,27 @@ public class ToolBar extends Panel{
                                                 }
                                             }
                                     );
+        DeleteBtn = new Button("Delete");
+        this.add(DeleteBtn);
+        DeleteBtn.addMouseListener(new MouseAdapter()
+                                        {
+                                            public void mouseClicked(MouseEvent e)
+                                            {
+                                                if(ToolBar.this.parent.parent.curPage.activeOBJ!=null)
+                                                {
+                                                    if(ToolBar.this.parent.parent.curPage.activeOBJ.status==Status.actived)
+                                                    {
+                                                        ToolBar.this.parent.parent.curPage.activeOBJ.status=Status.idle;
+                                                        //ToolBar.this.parent.parent.curPage.remove(ToolBar.this.parent.parent.curPage.activeOBJ);
+                                                        ToolBar.this.parent.parent.curPage.activeOBJ.setVisible(false);
+                                                        if(ToolBar.this.parent.parent.curPage.activeOBJ!=null)
+                                                        {
+                                                            ToolBar.this.parent.parent.curPage.activeOBJ=null;
+                                                        }
+                                                        ToolBar.this.parent.parent.curPage.repaint();
+                                                    }
+                                                }
+                                            }
+                                        });
     }
 }

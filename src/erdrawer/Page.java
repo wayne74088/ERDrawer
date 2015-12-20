@@ -61,7 +61,6 @@ public class Page extends Panel{
                                     public void mouseReleased(MouseEvent e)
                                     {
                                         Graphics g=Page.this.getGraphics();
-
                                         if(Page.this.parent.parent.parent.status==Status.line)
                                         {
                                             
