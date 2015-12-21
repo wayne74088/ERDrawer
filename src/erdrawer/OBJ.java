@@ -13,11 +13,17 @@ import java.awt.event.*;
 public class OBJ extends Component
 {
     Page parent;
-    Status status=Status.idle;
-    Point p1,p2,m1,m2;
-    OBJ(Page p)
+    Status status=Status.idle,ss;
+    boolean first;
+    Point p1,p2,m1,m2,s1;
+    Dimension d1;
+    OBJ(Page p,Status s)
     {
         parent = p;
+        ss=s;
+        first=true;
+        s1=new Point();
+        d1=new Dimension();
         p1=new Point();
         p2=new Point();
         m1=new Point();
@@ -28,6 +34,15 @@ public class OBJ extends Component
                                         {
                                             if(status==Status.actived)
                                             {
+                                                if(first==true)
+                                                {   
+                                                    s1.x=p1.x;
+                                                    s1.y=p1.y;
+                                                    d1=OBJ.this.getSize();
+                                                    OBJ.this.parent.objects.insertElementAt(OBJ.this, OBJ.this.parent.objecttotal);
+                                                    Undo undo= new Undo(parent,s1,d1,ss);
+                                                    first=false;
+                                                }
                                                 m2.x=e.getXOnScreen();
                                                 m2.y=e.getYOnScreen();
                                                 p2.x=p1.x+(m2.x-m1.x);
@@ -49,12 +64,33 @@ public class OBJ extends Component
                                     {
                                         if(status==Status.actived)
                                         {
+                                            first=true;
                                             p1=OBJ.this.getLocation();
                                             m1.x=e.getXOnScreen();
                                             m1.y=e.getYOnScreen();
                                         }
                                     }
-   
+                                    
+                                    public void mouseReleased(MouseEvent e)
+                                    {
+                                        if(status==Status.actived)
+                                        {
+                                            if(OBJ.this.parent.objects.size()<OBJ.this.parent.objecttotal+1)
+                                            {
+                                                OBJ.this.parent.objects.setElementAt( OBJ.this, OBJ.this.parent.objecttotal);
+                                            }
+                                            else 
+                                            {
+                                                OBJ.this.parent.objects.setElementAt( OBJ.this, OBJ.this.parent.objecttotal);
+                                                for(int i=OBJ.this.parent.objecttotal+1;i<OBJ.this.parent.objects.size();)
+                                                {
+                                                    OBJ.this.parent.objects.remove(i);
+                                                }
+                                            }
+                                            OBJ.this.parent.objecttotal=OBJ.this.parent.objecttotal+1;
+                                        }
+                                    }
+                                    
                                     public void mouseClicked(MouseEvent e)
                                     {
                                         if(status==Status.idle)

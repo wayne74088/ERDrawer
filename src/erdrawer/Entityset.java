@@ -14,7 +14,7 @@ public class Entityset extends OBJ{
     Color color1;
     Entityset(Color c,Page p)
     {
-        super(p);
+        super(p,Status.rect);
         color1=c;
     }
     public void paint(Graphics g)

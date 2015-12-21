@@ -14,6 +14,7 @@ public class ControlPoints {
     Page parent;
     Panel N,S,W,E,NW,NE,SW,SE;
     Point p1,p2;
+    boolean first;
     ControlPoints(Page p)
     {
         parent = p;
@@ -59,6 +60,7 @@ public class ControlPoints {
                             {
                                 public void mousePressed(MouseEvent e)
                                 {
+                                    first=true;
                                     ControlPoints.this.parent.activeOBJ.status=Status.reSize;
                                     p1.x = e.getXOnScreen();
                                     p1.y = e.getYOnScreen();
@@ -66,6 +68,19 @@ public class ControlPoints {
                                 public void mouseReleased(MouseEvent e)
                                 {
                                     ControlPoints.this.parent.activeOBJ.status=Status.actived;
+                                    if(ControlPoints.this.parent.objects.size()<ControlPoints.this.parent.objecttotal+1)
+                                    {
+                                        ControlPoints.this.parent.objects.setElementAt(ControlPoints.this.parent.activeOBJ, ControlPoints.this.parent.objecttotal);
+                                    }
+                                    else
+                                    {
+                                        ControlPoints.this.parent.objects.setElementAt(ControlPoints.this.parent.activeOBJ, ControlPoints.this.parent.objecttotal);
+                                        for(int i=ControlPoints.this.parent.objecttotal+1;i<ControlPoints.this.parent.objects.size();)
+                                        {
+                                            ControlPoints.this.parent.objects.remove(i);
+                                        }
+                                    }
+                                    ControlPoints.this.parent.objecttotal=ControlPoints.this.parent.objecttotal+1;
                                     ControlPoints.this.parent.repaint();
                                 }
                             });
@@ -78,6 +93,12 @@ public class ControlPoints {
                                             p2.y = e.getYOnScreen();
                                             Point p=ControlPoints.this.parent.activeOBJ.getLocation();
                                             Dimension d=ControlPoints.this.parent.activeOBJ.getSize();
+                                            if(first==true)
+                                            {
+                                                ControlPoints.this.parent.objects.insertElementAt(ControlPoints.this.parent.activeOBJ,  ControlPoints.this.parent.objecttotal);
+                                                Undo undo=new Undo(ControlPoints.this.parent,p,d,ControlPoints.this.parent.activeOBJ.ss);
+                                                first=false;
+                                            }
                                             if((d.height+(p1.y-p2.y))>=0)
                                             {
                                                 d.height = d.height+(p1.y-p2.y);
@@ -94,6 +115,7 @@ public class ControlPoints {
                             {
                                 public void mousePressed(MouseEvent e)
                                 {
+                                    first=true;
                                     ControlPoints.this.parent.activeOBJ.status=Status.reSize;
                                     p1.x = e.getXOnScreen();
                                     p1.y = e.getYOnScreen();
@@ -101,6 +123,19 @@ public class ControlPoints {
                                 public void mouseReleased(MouseEvent e)
                                 {
                                     ControlPoints.this.parent.activeOBJ.status=Status.actived;
+                                    if(ControlPoints.this.parent.objects.size()<ControlPoints.this.parent.objecttotal+1)
+                                    {
+                                        ControlPoints.this.parent.objects.setElementAt(ControlPoints.this.parent.activeOBJ, ControlPoints.this.parent.objecttotal);
+                                    }
+                                    else
+                                    {
+                                        ControlPoints.this.parent.objects.setElementAt(ControlPoints.this.parent.activeOBJ, ControlPoints.this.parent.objecttotal);
+                                        for(int i=ControlPoints.this.parent.objecttotal+1;i<ControlPoints.this.parent.objects.size();)
+                                        {
+                                            ControlPoints.this.parent.objects.remove(i);
+                                        }
+                                    }
+                                    ControlPoints.this.parent.objecttotal=ControlPoints.this.parent.objecttotal+1;
                                     ControlPoints.this.parent.repaint();
                                 }
                             });
@@ -112,6 +147,12 @@ public class ControlPoints {
                                             p2.y = e.getYOnScreen();
                                             Point p=ControlPoints.this.parent.activeOBJ.getLocation();
                                             Dimension d=ControlPoints.this.parent.activeOBJ.getSize();
+                                            if(first==true)
+                                            {
+                                                ControlPoints.this.parent.objects.insertElementAt(ControlPoints.this.parent.activeOBJ,  ControlPoints.this.parent.objecttotal);
+                                                Undo undo=new Undo(ControlPoints.this.parent,p,d,ControlPoints.this.parent.activeOBJ.ss);
+                                                first=false;
+                                            }
                                             if(((d.height+(p1.y-p2.y))>=0)&&((d.width+(p2.x-p1.x))>=0))
                                             {
                                                 d.height = d.height+(p1.y-p2.y);
@@ -129,6 +170,7 @@ public class ControlPoints {
                             {
                                 public void mousePressed(MouseEvent e)
                                 {
+                                    first=true;
                                     ControlPoints.this.parent.activeOBJ.status=Status.reSize;
                                     p1.x = e.getXOnScreen();
                                     p1.y = e.getYOnScreen();
@@ -136,6 +178,19 @@ public class ControlPoints {
                                 public void mouseReleased(MouseEvent e)
                                 {
                                     ControlPoints.this.parent.activeOBJ.status=Status.actived;
+                                    if(ControlPoints.this.parent.objects.size()<ControlPoints.this.parent.objecttotal+1)
+                                    {
+                                        ControlPoints.this.parent.objects.setElementAt(ControlPoints.this.parent.activeOBJ, ControlPoints.this.parent.objecttotal);
+                                    }
+                                    else
+                                    {
+                                        ControlPoints.this.parent.objects.setElementAt(ControlPoints.this.parent.activeOBJ, ControlPoints.this.parent.objecttotal);
+                                        for(int i=ControlPoints.this.parent.objecttotal+1;i<ControlPoints.this.parent.objects.size();)
+                                        {
+                                            ControlPoints.this.parent.objects.remove(i);
+                                        }
+                                    }
+                                    ControlPoints.this.parent.objecttotal=ControlPoints.this.parent.objecttotal+1;
                                     ControlPoints.this.parent.repaint();
                                 }
                             });
@@ -147,6 +202,12 @@ public class ControlPoints {
                                             p2.y = e.getYOnScreen();
                                             Point p=ControlPoints.this.parent.activeOBJ.getLocation();
                                             Dimension d=ControlPoints.this.parent.activeOBJ.getSize();
+                                            if(first==true)
+                                            {
+                                                ControlPoints.this.parent.objects.insertElementAt(ControlPoints.this.parent.activeOBJ,  ControlPoints.this.parent.objecttotal);
+                                                Undo undo=new Undo(ControlPoints.this.parent,p,d,ControlPoints.this.parent.activeOBJ.ss);
+                                                first=false;
+                                            }
                                             if((d.width+(p2.x-p1.x))>=0)
                                             {
                                                 d.width = d.width + (p2.x-p1.x);
@@ -161,6 +222,7 @@ public class ControlPoints {
                             {
                                 public void mousePressed(MouseEvent e)
                                 {
+                                    first=true;
                                     ControlPoints.this.parent.activeOBJ.status=Status.reSize;
                                     p1.x = e.getXOnScreen();
                                     p1.y = e.getYOnScreen();
@@ -168,6 +230,19 @@ public class ControlPoints {
                                 public void mouseReleased(MouseEvent e)
                                 {
                                     ControlPoints.this.parent.activeOBJ.status=Status.actived;
+                                    if(ControlPoints.this.parent.objects.size()<ControlPoints.this.parent.objecttotal+1)
+                                    {
+                                        ControlPoints.this.parent.objects.setElementAt(ControlPoints.this.parent.activeOBJ, ControlPoints.this.parent.objecttotal);
+                                    }
+                                    else
+                                    {
+                                        ControlPoints.this.parent.objects.setElementAt(ControlPoints.this.parent.activeOBJ, ControlPoints.this.parent.objecttotal);
+                                        for(int i=ControlPoints.this.parent.objecttotal+1;i<ControlPoints.this.parent.objects.size();)
+                                        {
+                                            ControlPoints.this.parent.objects.remove(i);
+                                        }
+                                    }
+                                    ControlPoints.this.parent.objecttotal=ControlPoints.this.parent.objecttotal+1;
                                     ControlPoints.this.parent.repaint();
                                 }
                             });
@@ -179,6 +254,12 @@ public class ControlPoints {
                                             p2.y = e.getYOnScreen();
                                             Point p=ControlPoints.this.parent.activeOBJ.getLocation();
                                             Dimension d=ControlPoints.this.parent.activeOBJ.getSize();
+                                            if(first==true)
+                                            {
+                                                ControlPoints.this.parent.objects.insertElementAt(ControlPoints.this.parent.activeOBJ,  ControlPoints.this.parent.objecttotal);
+                                                Undo undo=new Undo(ControlPoints.this.parent,p,d,ControlPoints.this.parent.activeOBJ.ss);
+                                                first=false;
+                                            }
                                             if((d.height+(p2.y-p1.y)>=0)&&(d.width+(p2.x-p1.x)>=0))
                                             {
                                                 d.height = d.height+(p2.y-p1.y);
@@ -194,6 +275,7 @@ public class ControlPoints {
                             {
                                 public void mousePressed(MouseEvent e)
                                 {
+                                    first=true;
                                     ControlPoints.this.parent.activeOBJ.status=Status.reSize;
                                     p1.x = e.getXOnScreen();
                                     p1.y = e.getYOnScreen();
@@ -201,6 +283,19 @@ public class ControlPoints {
                                 public void mouseReleased(MouseEvent e)
                                 {
                                     ControlPoints.this.parent.activeOBJ.status=Status.actived;
+                                    if(ControlPoints.this.parent.objects.size()<ControlPoints.this.parent.objecttotal+1)
+                                    {
+                                        ControlPoints.this.parent.objects.setElementAt(ControlPoints.this.parent.activeOBJ, ControlPoints.this.parent.objecttotal);
+                                    }
+                                    else
+                                    {
+                                        ControlPoints.this.parent.objects.setElementAt(ControlPoints.this.parent.activeOBJ, ControlPoints.this.parent.objecttotal);
+                                        for(int i=ControlPoints.this.parent.objecttotal+1;i<ControlPoints.this.parent.objects.size();)
+                                        {
+                                            ControlPoints.this.parent.objects.remove(i);
+                                        }
+                                    }
+                                    ControlPoints.this.parent.objecttotal=ControlPoints.this.parent.objecttotal+1;
                                     ControlPoints.this.parent.repaint();
                                 }
                             });
@@ -212,6 +307,12 @@ public class ControlPoints {
                                             p2.y = e.getYOnScreen();
                                             Point p=ControlPoints.this.parent.activeOBJ.getLocation();
                                             Dimension d=ControlPoints.this.parent.activeOBJ.getSize();
+                                            if(first==true)
+                                            {
+                                                ControlPoints.this.parent.objects.insertElementAt(ControlPoints.this.parent.activeOBJ,  ControlPoints.this.parent.objecttotal);
+                                                Undo undo=new Undo(ControlPoints.this.parent,p,d,ControlPoints.this.parent.activeOBJ.ss);
+                                                first=false;
+                                            }
                                             if(d.height+(p2.y-p1.y)>=0)
                                             {
                                                 d.height = d.height+(p2.y-p1.y);
@@ -226,6 +327,7 @@ public class ControlPoints {
                             {
                                 public void mousePressed(MouseEvent e)
                                 {
+                                    first=true;
                                     ControlPoints.this.parent.activeOBJ.status=Status.reSize;
                                     p1.x = e.getXOnScreen();
                                     p1.y = e.getYOnScreen();
@@ -233,6 +335,19 @@ public class ControlPoints {
                                 public void mouseReleased(MouseEvent e)
                                 {
                                     ControlPoints.this.parent.activeOBJ.status=Status.actived;
+                                    if(ControlPoints.this.parent.objects.size()<ControlPoints.this.parent.objecttotal+1)
+                                    {
+                                        ControlPoints.this.parent.objects.setElementAt(ControlPoints.this.parent.activeOBJ, ControlPoints.this.parent.objecttotal);
+                                    }
+                                    else
+                                    {
+                                        ControlPoints.this.parent.objects.setElementAt(ControlPoints.this.parent.activeOBJ, ControlPoints.this.parent.objecttotal);
+                                        for(int i=ControlPoints.this.parent.objecttotal+1;i<ControlPoints.this.parent.objects.size();)
+                                        {
+                                            ControlPoints.this.parent.objects.remove(i);
+                                        }
+                                    }
+                                    ControlPoints.this.parent.objecttotal=ControlPoints.this.parent.objecttotal+1;
                                     ControlPoints.this.parent.repaint();
                                 }
                             });
@@ -244,6 +359,12 @@ public class ControlPoints {
                                             p2.y = e.getYOnScreen();
                                             Point p=ControlPoints.this.parent.activeOBJ.getLocation();
                                             Dimension d=ControlPoints.this.parent.activeOBJ.getSize();
+                                            if(first==true)
+                                            {
+                                                ControlPoints.this.parent.objects.insertElementAt(ControlPoints.this.parent.activeOBJ,  ControlPoints.this.parent.objecttotal);
+                                                Undo undo=new Undo(ControlPoints.this.parent,p,d,ControlPoints.this.parent.activeOBJ.ss);
+                                                first=false;
+                                            }
                                             if((d.height+(p2.y-p1.y)>=0)&&(d.width+(p1.x-p2.x)>=0))
                                             {
                                                 d.height = d.height+(p2.y-p1.y);
@@ -261,6 +382,7 @@ public class ControlPoints {
                             {
                                 public void mousePressed(MouseEvent e)
                                 {
+                                    first=true;
                                     ControlPoints.this.parent.activeOBJ.status=Status.reSize;
                                     p1.x = e.getXOnScreen();
                                     p1.y = e.getYOnScreen();
@@ -268,6 +390,19 @@ public class ControlPoints {
                                 public void mouseReleased(MouseEvent e)
                                 {
                                     ControlPoints.this.parent.activeOBJ.status=Status.actived;
+                                    if(ControlPoints.this.parent.objects.size()<ControlPoints.this.parent.objecttotal+1)
+                                    {
+                                        ControlPoints.this.parent.objects.setElementAt(ControlPoints.this.parent.activeOBJ, ControlPoints.this.parent.objecttotal);
+                                    }
+                                    else
+                                    {
+                                        ControlPoints.this.parent.objects.setElementAt(ControlPoints.this.parent.activeOBJ, ControlPoints.this.parent.objecttotal);
+                                        for(int i=ControlPoints.this.parent.objecttotal+1;i<ControlPoints.this.parent.objects.size();)
+                                        {
+                                            ControlPoints.this.parent.objects.remove(i);
+                                        }
+                                    }
+                                    ControlPoints.this.parent.objecttotal=ControlPoints.this.parent.objecttotal+1;
                                     ControlPoints.this.parent.repaint();
                                 }
                             });
@@ -279,6 +414,12 @@ public class ControlPoints {
                                             p2.y = e.getYOnScreen();
                                             Point p=ControlPoints.this.parent.activeOBJ.getLocation();
                                             Dimension d=ControlPoints.this.parent.activeOBJ.getSize();
+                                            if(first==true)
+                                            {
+                                                ControlPoints.this.parent.objects.insertElementAt(ControlPoints.this.parent.activeOBJ,  ControlPoints.this.parent.objecttotal);
+                                                Undo undo=new Undo(ControlPoints.this.parent,p,d,ControlPoints.this.parent.activeOBJ.ss);
+                                                first=false;
+                                            }
                                             if(d.width+(p1.x-p2.x)>=0)
                                             {
                                                 d.width = d.width+(p1.x-p2.x);
@@ -295,6 +436,7 @@ public class ControlPoints {
                             {
                                 public void mousePressed(MouseEvent e)
                                 {
+                                    first=true;
                                     ControlPoints.this.parent.activeOBJ.status=Status.reSize;
                                     p1.x = e.getXOnScreen();
                                     p1.y = e.getYOnScreen();
@@ -302,6 +444,19 @@ public class ControlPoints {
                                 public void mouseReleased(MouseEvent e)
                                 {
                                     ControlPoints.this.parent.activeOBJ.status=Status.actived;
+                                    if(ControlPoints.this.parent.objects.size()<ControlPoints.this.parent.objecttotal+1)
+                                    {
+                                        ControlPoints.this.parent.objects.setElementAt(ControlPoints.this.parent.activeOBJ, ControlPoints.this.parent.objecttotal);
+                                    }
+                                    else
+                                    {
+                                        ControlPoints.this.parent.objects.setElementAt(ControlPoints.this.parent.activeOBJ, ControlPoints.this.parent.objecttotal);
+                                        for(int i=ControlPoints.this.parent.objecttotal+1;i<ControlPoints.this.parent.objects.size();)
+                                        {
+                                            ControlPoints.this.parent.objects.remove(i);
+                                        }
+                                    }
+                                    ControlPoints.this.parent.objecttotal=ControlPoints.this.parent.objecttotal+1;
                                     ControlPoints.this.parent.repaint();
                                 }
                             });
@@ -313,6 +468,12 @@ public class ControlPoints {
                                             p2.y = e.getYOnScreen();
                                             Point p=ControlPoints.this.parent.activeOBJ.getLocation();
                                             Dimension d=ControlPoints.this.parent.activeOBJ.getSize();
+                                            if(first==true)
+                                            {
+                                                ControlPoints.this.parent.objects.insertElementAt(ControlPoints.this.parent.activeOBJ,  ControlPoints.this.parent.objecttotal);
+                                                Undo undo=new Undo(ControlPoints.this.parent,p,d,ControlPoints.this.parent.activeOBJ.ss);
+                                                first=false;
+                                            }
                                             if((d.height+(p1.y-p2.y)>=0)&&(d.width+(p1.x-p2.x)>=0))
                                             {
                                                 d.height = d.height+(p1.y-p2.y);

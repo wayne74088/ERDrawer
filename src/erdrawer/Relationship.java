@@ -15,7 +15,7 @@ public class Relationship extends OBJ{
     Color color1;
     Relationship(Color c,Page p)
     {
-        super(p);
+        super(p,Status.diamond);
         color1=c;
     }
     public void paint(Graphics g)

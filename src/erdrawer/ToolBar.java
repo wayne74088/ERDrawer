@@ -6,16 +6,21 @@
 package erdrawer;
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.image.*;
 import javax.swing.JColorChooser;
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import java.io.*;
+import java.net.*;
 /**
  *
  * @author Wayne
  */
 
-public class ToolBar extends Panel{
+public class ToolBar extends JPanel{
     MyWindow parent;
     Color color=Color.black,color1;
-    Button newPageBtn,nextPageBtn, prevPageBtn, firstPageBtn, lastPageBtn,penBtn,lineBtn,entitysetBtn,rectBtn,diamondBtn,ovalBtn,setColorBtn,DeleteBtn;
+    Button newPageBtn,nextPageBtn, prevPageBtn, firstPageBtn, lastPageBtn,lineBtn,entitysetBtn,rectBtn,diamondBtn,ovalBtn,setColorBtn,DeleteBtn,UndoBtn;
     ToolBar(MyWindow p)
     {
         super();
@@ -33,7 +38,7 @@ public class ToolBar extends Panel{
                                             if(cp!=null)
                                             {
                                                 ToolBar.this.parent.remove(cp);
-                                            }
+                                            }    
                                             ToolBar.this.parent.add(np,BorderLayout.CENTER);
                                             ToolBar.this.parent.parent.pages.add(np);
                                             ToolBar.this.parent.parent.curPage=np;
@@ -149,27 +154,7 @@ public class ToolBar extends Panel{
                                             }
                                         }
                                     );
-        penBtn=new Button("Pen");
-        this.add(penBtn);
-        penBtn.addMouseListener(new MouseAdapter()
-                                    {
-                                        public void mouseClicked(MouseEvent e)
-                                        {
-                                            Page cp=ToolBar.this.parent.parent.curPage;
-                                            if(ToolBar.this.parent.parent.status==Status.pen)
-                                            {
-                                                ToolBar.this.parent.parent.status=Status.free;
-                                                ToolBar.this.parent.mb.updateInfo(cp);
-                                            }
-                                            else                                       
-                                            {
-                                                ToolBar.this.parent.parent.status=Status.pen;
-                                                ToolBar.this.parent.mb.updateInfo(cp);
-                                            } 
-                                        }
-                                    }
-                                );
-        
+                
         lineBtn=new Button("Line");
         this.add(lineBtn);
         lineBtn.addMouseListener(new MouseAdapter()
@@ -288,5 +273,49 @@ public class ToolBar extends Panel{
                                                 }
                                             }
                                         });
+        UndoBtn = new Button("Undo");
+        this.add(UndoBtn);
+        UndoBtn.addMouseListener(new MouseAdapter()
+                                    {
+                                        public void mouseClicked(MouseEvent e)
+                                        {
+                                            if(ToolBar.this.parent.parent.curPage.objecttotal>0)
+                                            {
+                                                Page cp=ToolBar.this.parent.parent.curPage;
+                                                /*if(cp!=null)
+                                                {
+                                                    ToolBar.this.parent.remove(cp);
+                                                }
+                                                Page pp = ToolBar.this.parent.parent.curPage.pane.elementAt(0);
+                                                pp.setVisible(true);
+                                                ToolBar.this.parent.add(pp,BorderLayout.CENTER);
+                                                ToolBar.this.parent.parent.curPage=pp;
+                                                
+                                                */
+                                                System.out.println(ToolBar.this.parent.parent.curPage.objects.size());
+                                                System.out.println(ToolBar.this.parent.parent.curPage.objecttotal);
+                                                ToolBar.this.parent.parent.curPage.objecttotal=ToolBar.this.parent.parent.curPage.objecttotal-1;
+                                                ToolBar.this.parent.parent.curPage.obj=ToolBar.this.parent.parent.curPage.objects.get(ToolBar.this.parent.parent.curPage.objecttotal);
+                                                if(ToolBar.this.parent.parent.curPage.activeOBJ==ToolBar.this.parent.parent.curPage.obj)
+                                                {
+                                                    ToolBar.this.parent.parent.curPage.activeOBJ=null;
+                                                    ToolBar.this.parent.parent.curPage.obj.status=Status.idle;
+                                                }
+                                                ToolBar.this.parent.parent.curPage.obj.setVisible(false);
+                                                ToolBar.this.parent.parent.curPage.obj=null;
+                                                if(ToolBar.this.parent.parent.curPage.objecttotal-1>=0)
+                                                {
+                                                    ToolBar.this.parent.parent.curPage.obj=ToolBar.this.parent.parent.curPage.objects.get(ToolBar.this.parent.parent.curPage.objecttotal-1);
+                                                    if(ToolBar.this.parent.parent.curPage.obj.isVisible()==false)
+                                                    {
+                                                        ToolBar.this.parent.parent.curPage.obj.setVisible(true);
+                                                        ToolBar.this.parent.parent.curPage.activeOBJ=ToolBar.this.parent.parent.curPage.obj;
+                                                    }
+                                                    ToolBar.this.parent.parent.curPage.obj=null;
+                                                }
+                                                ToolBar.this.parent.parent.curPage.repaint();
+                                            }
+                                        }
+                                    });
     }
 }

@@ -7,18 +7,20 @@ package erdrawer;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.Vector;
+import javax.swing.*;
 /**
  *
  * @author Wayne
  */
-public class Page extends Panel{
+public class Page extends JPanel{
     ToolBar parent;
     Point p1,p2;
     boolean first,First;
     Vector<Line> Lines;
     Vector<OBJ> objects;
-    OBJ activeOBJ;
+    OBJ activeOBJ,obj;
     ControlPoints cp;
+    int objecttotal=0;
     Page(ToolBar p)
     {
         super();       
@@ -31,7 +33,8 @@ public class Page extends Panel{
         p1=new Point();
         p2=new Point();
         first=true;
-        activeOBJ=new OBJ(Page.this);
+        activeOBJ=new OBJ(Page.this,null);
+        obj=new OBJ(Page.this,null);
         activeOBJ=null;
         this.setBackground(Color.white); 
         this.addMouseListener(new MouseAdapter()
@@ -45,8 +48,7 @@ public class Page extends Panel{
                                             activeOBJ=null;
                                         }
                                         Page.this.repaint();
-                                        if((Page.this.parent.parent.parent.status==Status.pen)||
-                                           (Page.this.parent.parent.parent.status==Status.line)||
+                                        if((Page.this.parent.parent.parent.status==Status.line)||
                                            (Page.this.parent.parent.parent.status==Status.rect)||
                                            (Page.this.parent.parent.parent.status==Status.diamond)||
                                            (Page.this.parent.parent.parent.status==Status.oval))
@@ -101,7 +103,25 @@ public class Page extends Panel{
                                                 Entity.setLocation(p1.x, p2.y);
                                             }
                                             Page.this.add(Entity);
-                                            objects.add(Entity);
+                                            //objects.set(objecttotal,Entity);
+                                            if(objects.size()==0)
+                                            {
+                                                //ob[objecttotal]=Entity;
+                                                objects.insertElementAt(Entity, objecttotal);
+                                            }
+                                            else if(objects.size()<objecttotal+1)
+                                            {
+                                                objects.insertElementAt(Entity, objecttotal);
+                                            }
+                                            else
+                                            {
+                                                objects.setElementAt(Entity, objecttotal);
+                                                for(int i=objecttotal+1;i<objects.size();)
+                                                {
+                                                    objects.removeElementAt(i);
+                                                }
+                                            }
+                                            objecttotal=objecttotal+1;
                                             if(Page.this.activeOBJ!=null)
                                             {
                                                 activeOBJ.status=Status.idle;
@@ -136,7 +156,23 @@ public class Page extends Panel{
                                                 Relation.setLocation(p1.x, p2.y);
                                             }
                                             Page.this.add(Relation);
-                                            objects.add(Relation);
+                                            if(objects.size()==0)
+                                            {
+                                                objects.insertElementAt(Relation, objecttotal);
+                                            }
+                                            else if(objects.size()<objecttotal+1)
+                                            {
+                                                objects.insertElementAt(Relation, objecttotal);
+                                            }
+                                            else
+                                            {
+                                                objects.setElementAt(Relation, objecttotal);
+                                                for(int i=objecttotal+1;i<objects.size();)
+                                                {
+                                                    objects.removeElementAt(i);
+                                                }
+                                            }
+                                            objecttotal=objecttotal+1;
                                             if(Page.this.activeOBJ!=null)
                                             {
                                                 activeOBJ.status=Status.idle;
@@ -171,13 +207,28 @@ public class Page extends Panel{
                                                 attributen.setLocation(p1.x, p2.y);
                                             }
                                             Page.this.add(attributen);
-                                            objects.add(attributen);
+                                            if(objects.size()==0)
+                                            {
+                                                objects.insertElementAt(attributen, objecttotal);
+                                            }
+                                            else if(objects.size()<objecttotal+1)
+                                            {
+                                                objects.insertElementAt(attributen, objecttotal);
+                                            }
+                                            else
+                                            {
+                                                objects.setElementAt(attributen, objecttotal);
+                                                for(int i=objecttotal+1;i<objects.size();)
+                                                {
+                                                    objects.removeElementAt(i);
+                                                }
+                                            }
+                                            objecttotal=objecttotal+1;
                                             if(Page.this.activeOBJ!=null)
                                             {
                                                 activeOBJ.status=Status.idle;
                                             }
                                             Page.this.activeOBJ=attributen;
-                                            
                                             Page.this.repaint();
                                         }
                                         }         
@@ -185,7 +236,8 @@ public class Page extends Panel{
                                         {
                                             activeOBJ.status=Status.actived;
                                         }
-                                        }   
+                                        }
+                                        
                                     }
                                 }
                              );
@@ -194,17 +246,7 @@ public class Page extends Panel{
                                         public void mouseDragged(MouseEvent e)
                                         {
                                             Graphics g=Page.this.getGraphics();
-                                            if(Page.this.parent.parent.parent.status==Status.pen)
-                                            {
-                                                g.setColor(Page.this.parent.color);
-                                                p2.x=e.getX();
-                                                p2.y=e.getY();
-                                                g.drawLine(p1.x, p1.y, p2.x, p2.y);
-                                                Lines.add(new Line(p1,p2,Page.this.parent.color));
-                                                p1.x=p2.x;
-                                                p1.y=p2.y;
-                                            }
-                                            else if(Page.this.parent.parent.parent.status==Status.line)
+                                            if(Page.this.parent.parent.parent.status==Status.line)
                                             {      
                                                 Color colorline=new Color (Page.this.parent.color.getRed()^Page.this.getBackground().getRed(), Page.this.parent.color.getGreen()^Page.this.getBackground().getGreen(), Page.this.parent.color.getBlue()^Page.this.getBackground().getBlue());
                                                 g.setXORMode(colorline);
@@ -292,7 +334,7 @@ public class Page extends Panel{
             g.drawLine(p.x-5+d.width+10,p.y-5+d.height+10,p.x-5,p.y-5+d.height+10);
             g.drawLine(p.x-5,p.y-5,p.x-5,p.y-5+d.height+10);
         }
-        else
+        else if(activeOBJ==null)
         {
             cp.c(false);
         }

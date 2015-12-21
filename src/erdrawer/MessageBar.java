@@ -34,11 +34,7 @@ public class MessageBar extends Panel{
         }
         if(cursorInfo!=null)
         {
-            if(this.parent.parent.status==Status.pen)
-            {
-                cursorInfo.setText("Pen");
-            }
-            else if(this.parent.parent.status==Status.line)
+            if(this.parent.parent.status==Status.line)
             {
                 cursorInfo.setText("Line");
             }

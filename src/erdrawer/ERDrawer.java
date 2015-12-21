@@ -12,10 +12,11 @@ import java.util.Vector;
 public class ERDrawer {
     Vector<Page> pages;
     Page curPage;
+    MyWindow mywin;
     Status status=Status.free;
     ERDrawer()
     {
-     MyWindow mywin=new MyWindow(this);
+     mywin=new MyWindow(this);
      pages=new Vector<Page>();
      curPage=null;
     }
