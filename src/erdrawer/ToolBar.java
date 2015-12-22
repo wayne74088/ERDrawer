@@ -20,7 +20,8 @@ import java.net.*;
 public class ToolBar extends JPanel{
     MyWindow parent;
     Color color=Color.black,color1;
-    Button newPageBtn,nextPageBtn, prevPageBtn, firstPageBtn, lastPageBtn,lineBtn,entitysetBtn,rectBtn,diamondBtn,ovalBtn,setColorBtn,DeleteBtn,UndoBtn;
+    Button newPageBtn,nextPageBtn, prevPageBtn, firstPageBtn, lastPageBtn,lineBtn,entitysetBtn,rectBtn,diamondBtn,ovalBtn,setColorBtn,DeleteBtn,UndoBtn,RedoBtn;
+    int x;
     ToolBar(MyWindow p)
     {
         super();
@@ -73,7 +74,7 @@ public class ToolBar extends JPanel{
                                                     ToolBar.this.parent.add(pp,BorderLayout.CENTER);
                                                     ToolBar.this.parent.mb.updateInfo(pp);
                                                     ToolBar.this.parent.parent.curPage=pp;
-                                                    pp.revalidate();
+                                                    ToolBar.this.parent.parent.curPage.repaint();
                                                 }
                                             }
                                         }
@@ -101,7 +102,7 @@ public class ToolBar extends JPanel{
                                                     ToolBar.this.parent.add(np);
                                                     ToolBar.this.parent.mb.updateInfo(np);
                                                     ToolBar.this.parent.parent.curPage=np;
-                                                    np.revalidate();
+                                                    ToolBar.this.parent.parent.curPage.repaint();
                                                 }
                                             }
                                         }
@@ -125,7 +126,7 @@ public class ToolBar extends JPanel{
                                                     ToolBar.this.parent.add(fp,BorderLayout.CENTER);
                                                     ToolBar.this.parent.mb.updateInfo(fp);
                                                     ToolBar.this.parent.parent.curPage=fp;
-                                                    fp.revalidate();
+                                                    ToolBar.this.parent.parent.curPage.repaint();
                                                 }
                                             }
                                         }
@@ -149,7 +150,7 @@ public class ToolBar extends JPanel{
                                                     ToolBar.this.parent.add(lp,BorderLayout.CENTER);
                                                     ToolBar.this.parent.parent.curPage=lp;
                                                     ToolBar.this.parent.mb.updateInfo(lp);
-                                                    lp.revalidate();
+                                                    ToolBar.this.parent.parent.curPage.repaint();
                                                 }
                                             }
                                         }
@@ -262,8 +263,34 @@ public class ToolBar extends JPanel{
                                                     if(ToolBar.this.parent.parent.curPage.activeOBJ.status==Status.actived)
                                                     {
                                                         ToolBar.this.parent.parent.curPage.activeOBJ.status=Status.idle;
-                                                        //ToolBar.this.parent.parent.curPage.remove(ToolBar.this.parent.parent.curPage.activeOBJ);
-                                                        ToolBar.this.parent.parent.curPage.activeOBJ.setVisible(false);
+                                                        
+                                                        Point p1=new Point();
+                                                        p1=ToolBar.this.parent.parent.curPage.activeOBJ.getLocation();
+                                                        x=ToolBar.this.parent.parent.curPage.objecttotal-1;
+                                                        while(ToolBar.this.parent.parent.curPage.activeOBJ!=null)
+                                                        {
+                                                            if((ToolBar.this.parent.parent.curPage.Return[x][0]==p1.x)&&(ToolBar.this.parent.parent.curPage.Return[x][1]==p1.y))
+                                                            {
+                                                                break;
+                                                            }
+                                                            else
+                                                            {
+                                                                x--;
+                                                            }
+                                                        }
+                                                        ToolBar.this.parent.parent.curPage.Return[ToolBar.this.parent.parent.curPage.objecttotal][0]= ToolBar.this.parent.parent.curPage.Return[x][0];
+                                                        ToolBar.this.parent.parent.curPage.Return[ToolBar.this.parent.parent.curPage.objecttotal][1]= ToolBar.this.parent.parent.curPage.Return[x][1];
+                                                        ToolBar.this.parent.parent.curPage.Return[ToolBar.this.parent.parent.curPage.objecttotal][2]= ToolBar.this.parent.parent.curPage.Return[x][2];
+                                                        ToolBar.this.parent.parent.curPage.Return[ToolBar.this.parent.parent.curPage.objecttotal][3]= ToolBar.this.parent.parent.curPage.Return[x][3];
+                                                        ToolBar.this.parent.parent.curPage.Return[ToolBar.this.parent.parent.curPage.objecttotal][4]= ToolBar.this.parent.parent.curPage.Return[x][4];
+                                                        ToolBar.this.parent.parent.curPage.Return[ToolBar.this.parent.parent.curPage.objecttotal][5]=2;
+                                                        ToolBar.this.parent.parent.curPage.Return[ToolBar.this.parent.parent.curPage.objecttotal][6]=x;
+                                                        ToolBar.this.parent.parent.curPage.Return[x][0]=0;
+                                                        ToolBar.this.parent.parent.curPage.Return[x][1]=0;
+                                                        ToolBar.this.parent.parent.curPage.objects.add(ToolBar.this.parent.parent.curPage.activeOBJ);
+                                                        ToolBar.this.parent.parent.curPage.remove(ToolBar.this.parent.parent.curPage.activeOBJ);
+                                                        ToolBar.this.parent.parent.curPage.objecttotal=ToolBar.this.parent.parent.curPage.objecttotal+1;
+                                                        //ToolBar.this.parent.parent.curPage.activeOBJ.setVisible(false);
                                                         if(ToolBar.this.parent.parent.curPage.activeOBJ!=null)
                                                         {
                                                             ToolBar.this.parent.parent.curPage.activeOBJ=null;
@@ -281,38 +308,39 @@ public class ToolBar extends JPanel{
                                         {
                                             if(ToolBar.this.parent.parent.curPage.objecttotal>0)
                                             {
-                                                Page cp=ToolBar.this.parent.parent.curPage;
-                                                /*if(cp!=null)
-                                                {
-                                                    ToolBar.this.parent.remove(cp);
-                                                }
-                                                Page pp = ToolBar.this.parent.parent.curPage.pane.elementAt(0);
-                                                pp.setVisible(true);
-                                                ToolBar.this.parent.add(pp,BorderLayout.CENTER);
-                                                ToolBar.this.parent.parent.curPage=pp;
+                                                ToolBar.this.parent.parent.curPage.objecttotal--;
+                                                int b=ToolBar.this.parent.parent.curPage.objects.size();
                                                 
-                                                */
-                                                System.out.println(ToolBar.this.parent.parent.curPage.objects.size());
-                                                System.out.println(ToolBar.this.parent.parent.curPage.objecttotal);
-                                                ToolBar.this.parent.parent.curPage.objecttotal=ToolBar.this.parent.parent.curPage.objecttotal-1;
-                                                ToolBar.this.parent.parent.curPage.obj=ToolBar.this.parent.parent.curPage.objects.get(ToolBar.this.parent.parent.curPage.objecttotal);
-                                                if(ToolBar.this.parent.parent.curPage.activeOBJ==ToolBar.this.parent.parent.curPage.obj)
+                                                if(ToolBar.this.parent.parent.curPage.Return[ToolBar.this.parent.parent.curPage.objecttotal][5]==2)
                                                 {
-                                                    ToolBar.this.parent.parent.curPage.activeOBJ=null;
-                                                    ToolBar.this.parent.parent.curPage.obj.status=Status.idle;
+                                                    ToolBar.this.parent.parent.curPage.Return[ToolBar.this.parent.parent.curPage.Return[ToolBar.this.parent.parent.curPage.objecttotal][6]][0]=ToolBar.this.parent.parent.curPage.Return[ToolBar.this.parent.parent.curPage.objecttotal][0];
+                                                    ToolBar.this.parent.parent.curPage.Return[ToolBar.this.parent.parent.curPage.Return[ToolBar.this.parent.parent.curPage.objecttotal][6]][1]=ToolBar.this.parent.parent.curPage.Return[ToolBar.this.parent.parent.curPage.objecttotal][1];
+                                                    ToolBar.this.parent.parent.curPage.Return[ToolBar.this.parent.parent.curPage.Return[ToolBar.this.parent.parent.curPage.objecttotal][6]][2]=ToolBar.this.parent.parent.curPage.Return[ToolBar.this.parent.parent.curPage.objecttotal][2];
+                                                    ToolBar.this.parent.parent.curPage.Return[ToolBar.this.parent.parent.curPage.Return[ToolBar.this.parent.parent.curPage.objecttotal][6]][3]=ToolBar.this.parent.parent.curPage.Return[ToolBar.this.parent.parent.curPage.objecttotal][3];
+                                                    ToolBar.this.parent.parent.curPage.Return[ToolBar.this.parent.parent.curPage.Return[ToolBar.this.parent.parent.curPage.objecttotal][6]][4]=ToolBar.this.parent.parent.curPage.Return[ToolBar.this.parent.parent.curPage.objecttotal][4];
+                                                    ToolBar.this.parent.parent.curPage.Return[ToolBar.this.parent.parent.curPage.Return[ToolBar.this.parent.parent.curPage.objecttotal][6]][5]=1;
                                                 }
-                                                ToolBar.this.parent.parent.curPage.obj.setVisible(false);
-                                                ToolBar.this.parent.parent.curPage.obj=null;
                                                 if(ToolBar.this.parent.parent.curPage.objecttotal-1>=0)
                                                 {
-                                                    ToolBar.this.parent.parent.curPage.obj=ToolBar.this.parent.parent.curPage.objects.get(ToolBar.this.parent.parent.curPage.objecttotal-1);
-                                                    if(ToolBar.this.parent.parent.curPage.obj.isVisible()==false)
-                                                    {
-                                                        ToolBar.this.parent.parent.curPage.obj.setVisible(true);
-                                                        ToolBar.this.parent.parent.curPage.activeOBJ=ToolBar.this.parent.parent.curPage.obj;
-                                                    }
-                                                    ToolBar.this.parent.parent.curPage.obj=null;
+                                                if(ToolBar.this.parent.parent.curPage.Return[ToolBar.this.parent.parent.curPage.objecttotal-1][5]==3)
+                                                {
+                                                    ToolBar.this.parent.parent.curPage.objecttotal=ToolBar.this.parent.parent.curPage.objecttotal-1;
+                                                    ToolBar.this.parent.parent.curPage.Return[ToolBar.this.parent.parent.curPage.Return[ToolBar.this.parent.parent.curPage.objecttotal][6]][0]=ToolBar.this.parent.parent.curPage.Return[ToolBar.this.parent.parent.curPage.objecttotal][0];
+                                                    ToolBar.this.parent.parent.curPage.Return[ToolBar.this.parent.parent.curPage.Return[ToolBar.this.parent.parent.curPage.objecttotal][6]][1]=ToolBar.this.parent.parent.curPage.Return[ToolBar.this.parent.parent.curPage.objecttotal][1];
+                                                    ToolBar.this.parent.parent.curPage.Return[ToolBar.this.parent.parent.curPage.Return[ToolBar.this.parent.parent.curPage.objecttotal][6]][2]=ToolBar.this.parent.parent.curPage.Return[ToolBar.this.parent.parent.curPage.objecttotal][2];
+                                                    ToolBar.this.parent.parent.curPage.Return[ToolBar.this.parent.parent.curPage.Return[ToolBar.this.parent.parent.curPage.objecttotal][6]][3]=ToolBar.this.parent.parent.curPage.Return[ToolBar.this.parent.parent.curPage.objecttotal][3];
+                                                    ToolBar.this.parent.parent.curPage.Return[ToolBar.this.parent.parent.curPage.Return[ToolBar.this.parent.parent.curPage.objecttotal][6]][4]=ToolBar.this.parent.parent.curPage.Return[ToolBar.this.parent.parent.curPage.objecttotal][4];
+                                                    ToolBar.this.parent.parent.curPage.Return[ToolBar.this.parent.parent.curPage.Return[ToolBar.this.parent.parent.curPage.objecttotal][6]][5]=1;
                                                 }
+                                                }
+                                                
+                                                for(int i=b-1;i>=0;i--)
+                                                {
+                                                    ToolBar.this.parent.parent.curPage.remove(ToolBar.this.parent.parent.curPage.objects.get(i));
+                                                    ToolBar.this.parent.parent.curPage.objects.remove(i);
+                                                }
+                                                ToolBar.this.parent.parent.curPage.activeOBJ=null;
+                                                ToolBar.this.parent.parent.re=Status.undo;
                                                 ToolBar.this.parent.parent.curPage.repaint();
                                             }
                                         }

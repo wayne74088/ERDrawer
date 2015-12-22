@@ -14,6 +14,7 @@ public class ERDrawer {
     Page curPage;
     MyWindow mywin;
     Status status=Status.free;
+    Status re = Status.free;
     ERDrawer()
     {
      mywin=new MyWindow(this);

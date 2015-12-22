@@ -15,6 +15,7 @@ public class ControlPoints {
     Panel N,S,W,E,NW,NE,SW,SE;
     Point p1,p2;
     boolean first;
+    int x;
     ControlPoints(Page p)
     {
         parent = p;
@@ -68,19 +69,37 @@ public class ControlPoints {
                                 public void mouseReleased(MouseEvent e)
                                 {
                                     ControlPoints.this.parent.activeOBJ.status=Status.actived;
-                                    if(ControlPoints.this.parent.objects.size()<ControlPoints.this.parent.objecttotal+1)
+                                    ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][0]=ControlPoints.this.parent.activeOBJ.getX();
+                                    ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][1]=ControlPoints.this.parent.activeOBJ.getY();
+                                    ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][2]=ControlPoints.this.parent.activeOBJ.getWidth();
+                                    ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][3]=ControlPoints.this.parent.activeOBJ.getHeight();
+                                    if(ControlPoints.this.parent.activeOBJ.ss== Status.line)
                                     {
-                                        ControlPoints.this.parent.objects.setElementAt(ControlPoints.this.parent.activeOBJ, ControlPoints.this.parent.objecttotal);
-                                    }
-                                    else
-                                    {
-                                        ControlPoints.this.parent.objects.setElementAt(ControlPoints.this.parent.activeOBJ, ControlPoints.this.parent.objecttotal);
-                                        for(int i=ControlPoints.this.parent.objecttotal+1;i<ControlPoints.this.parent.objects.size();)
+                                        ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][4]=1;
+                                        if(ControlPoints.this.parent.activeOBJ.linestatus==true)
                                         {
-                                            ControlPoints.this.parent.objects.remove(i);
+                                            ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][7]=1;
+                                        }
+                                        else if(ControlPoints.this.parent.activeOBJ.linestatus==true)
+                                        {
+                                            ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][7]=0;
                                         }
                                     }
-                                    ControlPoints.this.parent.objecttotal=ControlPoints.this.parent.objecttotal+1;
+                                    else if(ControlPoints.this.parent.activeOBJ.ss== Status.rect)
+                                    {
+                                        ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][4]=2;
+                                    }
+                                    else if(ControlPoints.this.parent.activeOBJ.ss== Status.diamond)
+                                    {
+                                        ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][4]=3;
+                                    }
+                                    else if(ControlPoints.this.parent.activeOBJ.ss== Status.oval)
+                                    {
+                                        ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][4]=4;
+                                    }
+                                    ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][5]=1;
+                                    ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][6]=x;
+                                    ControlPoints.this.parent.objecttotal++;
                                     ControlPoints.this.parent.repaint();
                                 }
                             });
@@ -95,8 +114,28 @@ public class ControlPoints {
                                             Dimension d=ControlPoints.this.parent.activeOBJ.getSize();
                                             if(first==true)
                                             {
-                                                ControlPoints.this.parent.objects.insertElementAt(ControlPoints.this.parent.activeOBJ,  ControlPoints.this.parent.objecttotal);
-                                                Undo undo=new Undo(ControlPoints.this.parent,p,d,ControlPoints.this.parent.activeOBJ.ss);
+                                                x=ControlPoints.this.parent.objecttotal-1;
+                                                while(ControlPoints.this.parent.activeOBJ!=null)
+                                                {
+                                                    if((ControlPoints.this.parent.Return[x][0]==ControlPoints.this.parent.activeOBJ.getX())&&(ControlPoints.this.parent.Return[x][1]==ControlPoints.this.parent.activeOBJ.getY()))
+                                                    {
+                                                        break;
+                                                    }
+                                                    else
+                                                    {
+                                                        x--;
+                                                    }
+                                                }
+                                                ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][0]=ControlPoints.this.parent.Return[x][0];
+                                                ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][1]=ControlPoints.this.parent.Return[x][1];
+                                                ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][2]=ControlPoints.this.parent.Return[x][2];
+                                                ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][3]=ControlPoints.this.parent.Return[x][3];
+                                                ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][4]=ControlPoints.this.parent.Return[x][4];
+                                                ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][5]=3;
+                                                ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][6]=x;
+                                                ControlPoints.this.parent.Return[x][0]=0;
+                                                ControlPoints.this.parent.Return[x][1]=0;
+                                                ControlPoints.this.parent.objecttotal++;
                                                 first=false;
                                             }
                                             if((d.height+(p1.y-p2.y))>=0)
@@ -123,19 +162,37 @@ public class ControlPoints {
                                 public void mouseReleased(MouseEvent e)
                                 {
                                     ControlPoints.this.parent.activeOBJ.status=Status.actived;
-                                    if(ControlPoints.this.parent.objects.size()<ControlPoints.this.parent.objecttotal+1)
+                                    ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][0]=ControlPoints.this.parent.activeOBJ.getX();
+                                    ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][1]=ControlPoints.this.parent.activeOBJ.getY();
+                                    ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][2]=ControlPoints.this.parent.activeOBJ.getWidth();
+                                    ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][3]=ControlPoints.this.parent.activeOBJ.getHeight();
+                                    if(ControlPoints.this.parent.activeOBJ.ss== Status.line)
                                     {
-                                        ControlPoints.this.parent.objects.setElementAt(ControlPoints.this.parent.activeOBJ, ControlPoints.this.parent.objecttotal);
-                                    }
-                                    else
-                                    {
-                                        ControlPoints.this.parent.objects.setElementAt(ControlPoints.this.parent.activeOBJ, ControlPoints.this.parent.objecttotal);
-                                        for(int i=ControlPoints.this.parent.objecttotal+1;i<ControlPoints.this.parent.objects.size();)
+                                        ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][4]=1;
+                                        if(ControlPoints.this.parent.activeOBJ.linestatus==true)
                                         {
-                                            ControlPoints.this.parent.objects.remove(i);
+                                            ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][7]=1;
+                                        }
+                                        else if(ControlPoints.this.parent.activeOBJ.linestatus==true)
+                                        {
+                                            ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][7]=0;
                                         }
                                     }
-                                    ControlPoints.this.parent.objecttotal=ControlPoints.this.parent.objecttotal+1;
+                                    else if(ControlPoints.this.parent.activeOBJ.ss== Status.rect)
+                                    {
+                                        ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][4]=2;
+                                    }
+                                    else if(ControlPoints.this.parent.activeOBJ.ss== Status.diamond)
+                                    {
+                                        ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][4]=3;
+                                    }
+                                    else if(ControlPoints.this.parent.activeOBJ.ss== Status.oval)
+                                    {
+                                        ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][4]=4;
+                                    }
+                                    ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][5]=1;
+                                    ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][6]=x;
+                                    ControlPoints.this.parent.objecttotal++;
                                     ControlPoints.this.parent.repaint();
                                 }
                             });
@@ -149,8 +206,28 @@ public class ControlPoints {
                                             Dimension d=ControlPoints.this.parent.activeOBJ.getSize();
                                             if(first==true)
                                             {
-                                                ControlPoints.this.parent.objects.insertElementAt(ControlPoints.this.parent.activeOBJ,  ControlPoints.this.parent.objecttotal);
-                                                Undo undo=new Undo(ControlPoints.this.parent,p,d,ControlPoints.this.parent.activeOBJ.ss);
+                                                x=ControlPoints.this.parent.objecttotal-1;
+                                                while(ControlPoints.this.parent.activeOBJ!=null)
+                                                {
+                                                    if((ControlPoints.this.parent.Return[x][0]==ControlPoints.this.parent.activeOBJ.getX())&&(ControlPoints.this.parent.Return[x][1]==ControlPoints.this.parent.activeOBJ.getY()))
+                                                    {
+                                                        break;
+                                                    }
+                                                    else
+                                                    {
+                                                        x--;
+                                                    }
+                                                }
+                                                ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][0]=ControlPoints.this.parent.Return[x][0];
+                                                ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][1]=ControlPoints.this.parent.Return[x][1];
+                                                ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][2]=ControlPoints.this.parent.Return[x][2];
+                                                ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][3]=ControlPoints.this.parent.Return[x][3];
+                                                ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][4]=ControlPoints.this.parent.Return[x][4];
+                                                ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][5]=3;
+                                                ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][6]=x;
+                                                ControlPoints.this.parent.Return[x][0]=0;
+                                                ControlPoints.this.parent.Return[x][1]=0;
+                                                ControlPoints.this.parent.objecttotal++;
                                                 first=false;
                                             }
                                             if(((d.height+(p1.y-p2.y))>=0)&&((d.width+(p2.x-p1.x))>=0))
@@ -178,19 +255,37 @@ public class ControlPoints {
                                 public void mouseReleased(MouseEvent e)
                                 {
                                     ControlPoints.this.parent.activeOBJ.status=Status.actived;
-                                    if(ControlPoints.this.parent.objects.size()<ControlPoints.this.parent.objecttotal+1)
+                                    ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][0]=ControlPoints.this.parent.activeOBJ.getX();
+                                    ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][1]=ControlPoints.this.parent.activeOBJ.getY();
+                                    ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][2]=ControlPoints.this.parent.activeOBJ.getWidth();
+                                    ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][3]=ControlPoints.this.parent.activeOBJ.getHeight();
+                                    if(ControlPoints.this.parent.activeOBJ.ss== Status.line)
                                     {
-                                        ControlPoints.this.parent.objects.setElementAt(ControlPoints.this.parent.activeOBJ, ControlPoints.this.parent.objecttotal);
-                                    }
-                                    else
-                                    {
-                                        ControlPoints.this.parent.objects.setElementAt(ControlPoints.this.parent.activeOBJ, ControlPoints.this.parent.objecttotal);
-                                        for(int i=ControlPoints.this.parent.objecttotal+1;i<ControlPoints.this.parent.objects.size();)
+                                        ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][4]=1;
+                                        if(ControlPoints.this.parent.activeOBJ.linestatus==true)
                                         {
-                                            ControlPoints.this.parent.objects.remove(i);
+                                            ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][7]=1;
+                                        }
+                                        else if(ControlPoints.this.parent.activeOBJ.linestatus==true)
+                                        {
+                                            ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][7]=0;
                                         }
                                     }
-                                    ControlPoints.this.parent.objecttotal=ControlPoints.this.parent.objecttotal+1;
+                                    else if(ControlPoints.this.parent.activeOBJ.ss== Status.rect)
+                                    {
+                                        ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][4]=2;
+                                    }
+                                    else if(ControlPoints.this.parent.activeOBJ.ss== Status.diamond)
+                                    {
+                                        ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][4]=3;
+                                    }
+                                    else if(ControlPoints.this.parent.activeOBJ.ss== Status.oval)
+                                    {
+                                        ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][4]=4;
+                                    }
+                                    ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][5]=1;
+                                    ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][6]=x;
+                                    ControlPoints.this.parent.objecttotal++;
                                     ControlPoints.this.parent.repaint();
                                 }
                             });
@@ -204,8 +299,28 @@ public class ControlPoints {
                                             Dimension d=ControlPoints.this.parent.activeOBJ.getSize();
                                             if(first==true)
                                             {
-                                                ControlPoints.this.parent.objects.insertElementAt(ControlPoints.this.parent.activeOBJ,  ControlPoints.this.parent.objecttotal);
-                                                Undo undo=new Undo(ControlPoints.this.parent,p,d,ControlPoints.this.parent.activeOBJ.ss);
+                                                x=ControlPoints.this.parent.objecttotal-1;
+                                                while(ControlPoints.this.parent.activeOBJ!=null)
+                                                {
+                                                    if((ControlPoints.this.parent.Return[x][0]==ControlPoints.this.parent.activeOBJ.getX())&&(ControlPoints.this.parent.Return[x][1]==ControlPoints.this.parent.activeOBJ.getY()))
+                                                    {
+                                                        break;
+                                                    }
+                                                    else
+                                                    {
+                                                        x--;
+                                                    }
+                                                }
+                                                ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][0]=ControlPoints.this.parent.Return[x][0];
+                                                ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][1]=ControlPoints.this.parent.Return[x][1];
+                                                ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][2]=ControlPoints.this.parent.Return[x][2];
+                                                ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][3]=ControlPoints.this.parent.Return[x][3];
+                                                ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][4]=ControlPoints.this.parent.Return[x][4];
+                                                ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][5]=3;
+                                                ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][6]=x;
+                                                ControlPoints.this.parent.Return[x][0]=0;
+                                                ControlPoints.this.parent.Return[x][1]=0;
+                                                ControlPoints.this.parent.objecttotal++;
                                                 first=false;
                                             }
                                             if((d.width+(p2.x-p1.x))>=0)
@@ -230,19 +345,37 @@ public class ControlPoints {
                                 public void mouseReleased(MouseEvent e)
                                 {
                                     ControlPoints.this.parent.activeOBJ.status=Status.actived;
-                                    if(ControlPoints.this.parent.objects.size()<ControlPoints.this.parent.objecttotal+1)
+                                    ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][0]=ControlPoints.this.parent.activeOBJ.getX();
+                                    ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][1]=ControlPoints.this.parent.activeOBJ.getY();
+                                    ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][2]=ControlPoints.this.parent.activeOBJ.getWidth();
+                                    ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][3]=ControlPoints.this.parent.activeOBJ.getHeight();
+                                    if(ControlPoints.this.parent.activeOBJ.ss== Status.line)
                                     {
-                                        ControlPoints.this.parent.objects.setElementAt(ControlPoints.this.parent.activeOBJ, ControlPoints.this.parent.objecttotal);
-                                    }
-                                    else
-                                    {
-                                        ControlPoints.this.parent.objects.setElementAt(ControlPoints.this.parent.activeOBJ, ControlPoints.this.parent.objecttotal);
-                                        for(int i=ControlPoints.this.parent.objecttotal+1;i<ControlPoints.this.parent.objects.size();)
+                                        ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][4]=1;
+                                        if(ControlPoints.this.parent.activeOBJ.linestatus==true)
                                         {
-                                            ControlPoints.this.parent.objects.remove(i);
+                                            ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][7]=1;
+                                        }
+                                        else if(ControlPoints.this.parent.activeOBJ.linestatus==true)
+                                        {
+                                            ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][7]=0;
                                         }
                                     }
-                                    ControlPoints.this.parent.objecttotal=ControlPoints.this.parent.objecttotal+1;
+                                    else if(ControlPoints.this.parent.activeOBJ.ss== Status.rect)
+                                    {
+                                        ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][4]=2;
+                                    }
+                                    else if(ControlPoints.this.parent.activeOBJ.ss== Status.diamond)
+                                    {
+                                        ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][4]=3;
+                                    }
+                                    else if(ControlPoints.this.parent.activeOBJ.ss== Status.oval)
+                                    {
+                                        ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][4]=4;
+                                    }
+                                    ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][5]=1;
+                                    ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][6]=x;
+                                    ControlPoints.this.parent.objecttotal++;
                                     ControlPoints.this.parent.repaint();
                                 }
                             });
@@ -256,8 +389,28 @@ public class ControlPoints {
                                             Dimension d=ControlPoints.this.parent.activeOBJ.getSize();
                                             if(first==true)
                                             {
-                                                ControlPoints.this.parent.objects.insertElementAt(ControlPoints.this.parent.activeOBJ,  ControlPoints.this.parent.objecttotal);
-                                                Undo undo=new Undo(ControlPoints.this.parent,p,d,ControlPoints.this.parent.activeOBJ.ss);
+                                                x=ControlPoints.this.parent.objecttotal-1;
+                                                while(ControlPoints.this.parent.activeOBJ!=null)
+                                                {
+                                                    if((ControlPoints.this.parent.Return[x][0]==ControlPoints.this.parent.activeOBJ.getX())&&(ControlPoints.this.parent.Return[x][1]==ControlPoints.this.parent.activeOBJ.getY()))
+                                                    {
+                                                        break;
+                                                    }
+                                                    else
+                                                    {
+                                                        x--;
+                                                    }
+                                                }
+                                                ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][0]=ControlPoints.this.parent.Return[x][0];
+                                                ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][1]=ControlPoints.this.parent.Return[x][1];
+                                                ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][2]=ControlPoints.this.parent.Return[x][2];
+                                                ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][3]=ControlPoints.this.parent.Return[x][3];
+                                                ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][4]=ControlPoints.this.parent.Return[x][4];
+                                                ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][5]=3;
+                                                ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][6]=x;
+                                                ControlPoints.this.parent.Return[x][0]=0;
+                                                ControlPoints.this.parent.Return[x][1]=0;
+                                                ControlPoints.this.parent.objecttotal++;
                                                 first=false;
                                             }
                                             if((d.height+(p2.y-p1.y)>=0)&&(d.width+(p2.x-p1.x)>=0))
@@ -283,19 +436,37 @@ public class ControlPoints {
                                 public void mouseReleased(MouseEvent e)
                                 {
                                     ControlPoints.this.parent.activeOBJ.status=Status.actived;
-                                    if(ControlPoints.this.parent.objects.size()<ControlPoints.this.parent.objecttotal+1)
+                                    ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][0]=ControlPoints.this.parent.activeOBJ.getX();
+                                    ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][1]=ControlPoints.this.parent.activeOBJ.getY();
+                                    ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][2]=ControlPoints.this.parent.activeOBJ.getWidth();
+                                    ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][3]=ControlPoints.this.parent.activeOBJ.getHeight();
+                                    if(ControlPoints.this.parent.activeOBJ.ss== Status.line)
                                     {
-                                        ControlPoints.this.parent.objects.setElementAt(ControlPoints.this.parent.activeOBJ, ControlPoints.this.parent.objecttotal);
-                                    }
-                                    else
-                                    {
-                                        ControlPoints.this.parent.objects.setElementAt(ControlPoints.this.parent.activeOBJ, ControlPoints.this.parent.objecttotal);
-                                        for(int i=ControlPoints.this.parent.objecttotal+1;i<ControlPoints.this.parent.objects.size();)
+                                        ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][4]=1;
+                                        if(ControlPoints.this.parent.activeOBJ.linestatus==true)
                                         {
-                                            ControlPoints.this.parent.objects.remove(i);
+                                            ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][7]=1;
+                                        }
+                                        else if(ControlPoints.this.parent.activeOBJ.linestatus==true)
+                                        {
+                                            ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][7]=0;
                                         }
                                     }
-                                    ControlPoints.this.parent.objecttotal=ControlPoints.this.parent.objecttotal+1;
+                                    else if(ControlPoints.this.parent.activeOBJ.ss== Status.rect)
+                                    {
+                                        ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][4]=2;
+                                    }
+                                    else if(ControlPoints.this.parent.activeOBJ.ss== Status.diamond)
+                                    {
+                                        ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][4]=3;
+                                    }
+                                    else if(ControlPoints.this.parent.activeOBJ.ss== Status.oval)
+                                    {
+                                        ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][4]=4;
+                                    }
+                                    ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][5]=1;
+                                    ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][6]=x;
+                                    ControlPoints.this.parent.objecttotal++;
                                     ControlPoints.this.parent.repaint();
                                 }
                             });
@@ -309,8 +480,28 @@ public class ControlPoints {
                                             Dimension d=ControlPoints.this.parent.activeOBJ.getSize();
                                             if(first==true)
                                             {
-                                                ControlPoints.this.parent.objects.insertElementAt(ControlPoints.this.parent.activeOBJ,  ControlPoints.this.parent.objecttotal);
-                                                Undo undo=new Undo(ControlPoints.this.parent,p,d,ControlPoints.this.parent.activeOBJ.ss);
+                                                x=ControlPoints.this.parent.objecttotal-1;
+                                                while(ControlPoints.this.parent.activeOBJ!=null)
+                                                {
+                                                    if((ControlPoints.this.parent.Return[x][0]==ControlPoints.this.parent.activeOBJ.getX())&&(ControlPoints.this.parent.Return[x][1]==ControlPoints.this.parent.activeOBJ.getY()))
+                                                    {
+                                                        break;
+                                                    }
+                                                    else
+                                                    {
+                                                        x--;
+                                                    }
+                                                }
+                                                ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][0]=ControlPoints.this.parent.Return[x][0];
+                                                ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][1]=ControlPoints.this.parent.Return[x][1];
+                                                ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][2]=ControlPoints.this.parent.Return[x][2];
+                                                ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][3]=ControlPoints.this.parent.Return[x][3];
+                                                ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][4]=ControlPoints.this.parent.Return[x][4];
+                                                ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][5]=3;
+                                                ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][6]=x;
+                                                ControlPoints.this.parent.Return[x][0]=0;
+                                                ControlPoints.this.parent.Return[x][1]=0;
+                                                ControlPoints.this.parent.objecttotal++;
                                                 first=false;
                                             }
                                             if(d.height+(p2.y-p1.y)>=0)
@@ -335,19 +526,37 @@ public class ControlPoints {
                                 public void mouseReleased(MouseEvent e)
                                 {
                                     ControlPoints.this.parent.activeOBJ.status=Status.actived;
-                                    if(ControlPoints.this.parent.objects.size()<ControlPoints.this.parent.objecttotal+1)
+                                    ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][0]=ControlPoints.this.parent.activeOBJ.getX();
+                                    ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][1]=ControlPoints.this.parent.activeOBJ.getY();
+                                    ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][2]=ControlPoints.this.parent.activeOBJ.getWidth();
+                                    ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][3]=ControlPoints.this.parent.activeOBJ.getHeight();
+                                    if(ControlPoints.this.parent.activeOBJ.ss== Status.line)
                                     {
-                                        ControlPoints.this.parent.objects.setElementAt(ControlPoints.this.parent.activeOBJ, ControlPoints.this.parent.objecttotal);
-                                    }
-                                    else
-                                    {
-                                        ControlPoints.this.parent.objects.setElementAt(ControlPoints.this.parent.activeOBJ, ControlPoints.this.parent.objecttotal);
-                                        for(int i=ControlPoints.this.parent.objecttotal+1;i<ControlPoints.this.parent.objects.size();)
+                                        ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][4]=1;
+                                        if(ControlPoints.this.parent.activeOBJ.linestatus==true)
                                         {
-                                            ControlPoints.this.parent.objects.remove(i);
+                                            ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][7]=1;
+                                        }
+                                        else if(ControlPoints.this.parent.activeOBJ.linestatus==true)
+                                        {
+                                            ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][7]=0;
                                         }
                                     }
-                                    ControlPoints.this.parent.objecttotal=ControlPoints.this.parent.objecttotal+1;
+                                    else if(ControlPoints.this.parent.activeOBJ.ss== Status.rect)
+                                    {
+                                        ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][4]=2;
+                                    }
+                                    else if(ControlPoints.this.parent.activeOBJ.ss== Status.diamond)
+                                    {
+                                        ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][4]=3;
+                                    }
+                                    else if(ControlPoints.this.parent.activeOBJ.ss== Status.oval)
+                                    {
+                                        ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][4]=4;
+                                    }
+                                    ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][5]=1;
+                                    ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][6]=x;
+                                    ControlPoints.this.parent.objecttotal++;
                                     ControlPoints.this.parent.repaint();
                                 }
                             });
@@ -361,8 +570,28 @@ public class ControlPoints {
                                             Dimension d=ControlPoints.this.parent.activeOBJ.getSize();
                                             if(first==true)
                                             {
-                                                ControlPoints.this.parent.objects.insertElementAt(ControlPoints.this.parent.activeOBJ,  ControlPoints.this.parent.objecttotal);
-                                                Undo undo=new Undo(ControlPoints.this.parent,p,d,ControlPoints.this.parent.activeOBJ.ss);
+                                                x=ControlPoints.this.parent.objecttotal-1;
+                                                while(ControlPoints.this.parent.activeOBJ!=null)
+                                                {
+                                                    if((ControlPoints.this.parent.Return[x][0]==ControlPoints.this.parent.activeOBJ.getX())&&(ControlPoints.this.parent.Return[x][1]==ControlPoints.this.parent.activeOBJ.getY()))
+                                                    {
+                                                        break;
+                                                    }
+                                                    else
+                                                    {
+                                                        x--;
+                                                    }
+                                                }
+                                                ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][0]=ControlPoints.this.parent.Return[x][0];
+                                                ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][1]=ControlPoints.this.parent.Return[x][1];
+                                                ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][2]=ControlPoints.this.parent.Return[x][2];
+                                                ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][3]=ControlPoints.this.parent.Return[x][3];
+                                                ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][4]=ControlPoints.this.parent.Return[x][4];
+                                                ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][5]=3;
+                                                ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][6]=x;
+                                                ControlPoints.this.parent.Return[x][0]=0;
+                                                ControlPoints.this.parent.Return[x][1]=0;
+                                                ControlPoints.this.parent.objecttotal++;
                                                 first=false;
                                             }
                                             if((d.height+(p2.y-p1.y)>=0)&&(d.width+(p1.x-p2.x)>=0))
@@ -390,19 +619,37 @@ public class ControlPoints {
                                 public void mouseReleased(MouseEvent e)
                                 {
                                     ControlPoints.this.parent.activeOBJ.status=Status.actived;
-                                    if(ControlPoints.this.parent.objects.size()<ControlPoints.this.parent.objecttotal+1)
+                                    ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][0]=ControlPoints.this.parent.activeOBJ.getX();
+                                    ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][1]=ControlPoints.this.parent.activeOBJ.getY();
+                                    ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][2]=ControlPoints.this.parent.activeOBJ.getWidth();
+                                    ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][3]=ControlPoints.this.parent.activeOBJ.getHeight();
+                                    if(ControlPoints.this.parent.activeOBJ.ss== Status.line)
                                     {
-                                        ControlPoints.this.parent.objects.setElementAt(ControlPoints.this.parent.activeOBJ, ControlPoints.this.parent.objecttotal);
-                                    }
-                                    else
-                                    {
-                                        ControlPoints.this.parent.objects.setElementAt(ControlPoints.this.parent.activeOBJ, ControlPoints.this.parent.objecttotal);
-                                        for(int i=ControlPoints.this.parent.objecttotal+1;i<ControlPoints.this.parent.objects.size();)
+                                        ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][4]=1;
+                                        if(ControlPoints.this.parent.activeOBJ.linestatus==true)
                                         {
-                                            ControlPoints.this.parent.objects.remove(i);
+                                            ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][7]=1;
+                                        }
+                                        else if(ControlPoints.this.parent.activeOBJ.linestatus==true)
+                                        {
+                                            ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][7]=0;
                                         }
                                     }
-                                    ControlPoints.this.parent.objecttotal=ControlPoints.this.parent.objecttotal+1;
+                                    else if(ControlPoints.this.parent.activeOBJ.ss== Status.rect)
+                                    {
+                                        ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][4]=2;
+                                    }
+                                    else if(ControlPoints.this.parent.activeOBJ.ss== Status.diamond)
+                                    {
+                                        ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][4]=3;
+                                    }
+                                    else if(ControlPoints.this.parent.activeOBJ.ss== Status.oval)
+                                    {
+                                        ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][4]=4;
+                                    }
+                                    ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][5]=1;
+                                    ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][6]=x;
+                                    ControlPoints.this.parent.objecttotal++;
                                     ControlPoints.this.parent.repaint();
                                 }
                             });
@@ -416,8 +663,28 @@ public class ControlPoints {
                                             Dimension d=ControlPoints.this.parent.activeOBJ.getSize();
                                             if(first==true)
                                             {
-                                                ControlPoints.this.parent.objects.insertElementAt(ControlPoints.this.parent.activeOBJ,  ControlPoints.this.parent.objecttotal);
-                                                Undo undo=new Undo(ControlPoints.this.parent,p,d,ControlPoints.this.parent.activeOBJ.ss);
+                                                x=ControlPoints.this.parent.objecttotal-1;
+                                                while(ControlPoints.this.parent.activeOBJ!=null)
+                                                {
+                                                    if((ControlPoints.this.parent.Return[x][0]==ControlPoints.this.parent.activeOBJ.getX())&&(ControlPoints.this.parent.Return[x][1]==ControlPoints.this.parent.activeOBJ.getY()))
+                                                    {
+                                                        break;
+                                                    }
+                                                    else
+                                                    {
+                                                        x--;
+                                                    }
+                                                }
+                                                ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][0]=ControlPoints.this.parent.Return[x][0];
+                                                ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][1]=ControlPoints.this.parent.Return[x][1];
+                                                ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][2]=ControlPoints.this.parent.Return[x][2];
+                                                ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][3]=ControlPoints.this.parent.Return[x][3];
+                                                ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][4]=ControlPoints.this.parent.Return[x][4];
+                                                ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][5]=3;
+                                                ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][6]=x;
+                                                ControlPoints.this.parent.Return[x][0]=0;
+                                                ControlPoints.this.parent.Return[x][1]=0;
+                                                ControlPoints.this.parent.objecttotal++;
                                                 first=false;
                                             }
                                             if(d.width+(p1.x-p2.x)>=0)
@@ -444,19 +711,37 @@ public class ControlPoints {
                                 public void mouseReleased(MouseEvent e)
                                 {
                                     ControlPoints.this.parent.activeOBJ.status=Status.actived;
-                                    if(ControlPoints.this.parent.objects.size()<ControlPoints.this.parent.objecttotal+1)
+                                    ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][0]=ControlPoints.this.parent.activeOBJ.getX();
+                                    ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][1]=ControlPoints.this.parent.activeOBJ.getY();
+                                    ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][2]=ControlPoints.this.parent.activeOBJ.getWidth();
+                                    ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][3]=ControlPoints.this.parent.activeOBJ.getHeight();
+                                    if(ControlPoints.this.parent.activeOBJ.ss== Status.line)
                                     {
-                                        ControlPoints.this.parent.objects.setElementAt(ControlPoints.this.parent.activeOBJ, ControlPoints.this.parent.objecttotal);
-                                    }
-                                    else
-                                    {
-                                        ControlPoints.this.parent.objects.setElementAt(ControlPoints.this.parent.activeOBJ, ControlPoints.this.parent.objecttotal);
-                                        for(int i=ControlPoints.this.parent.objecttotal+1;i<ControlPoints.this.parent.objects.size();)
+                                        ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][4]=1;
+                                        if(ControlPoints.this.parent.activeOBJ.linestatus==true)
                                         {
-                                            ControlPoints.this.parent.objects.remove(i);
+                                            ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][7]=1;
+                                        }
+                                        else if(ControlPoints.this.parent.activeOBJ.linestatus==true)
+                                        {
+                                            ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][7]=0;
                                         }
                                     }
-                                    ControlPoints.this.parent.objecttotal=ControlPoints.this.parent.objecttotal+1;
+                                    else if(ControlPoints.this.parent.activeOBJ.ss== Status.rect)
+                                    {
+                                        ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][4]=2;
+                                    }
+                                    else if(ControlPoints.this.parent.activeOBJ.ss== Status.diamond)
+                                    {
+                                        ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][4]=3;
+                                    }
+                                    else if(ControlPoints.this.parent.activeOBJ.ss== Status.oval)
+                                    {
+                                        ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][4]=4;
+                                    }
+                                    ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][5]=1;
+                                    ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][6]=x;
+                                    ControlPoints.this.parent.objecttotal++;
                                     ControlPoints.this.parent.repaint();
                                 }
                             });
@@ -470,8 +755,28 @@ public class ControlPoints {
                                             Dimension d=ControlPoints.this.parent.activeOBJ.getSize();
                                             if(first==true)
                                             {
-                                                ControlPoints.this.parent.objects.insertElementAt(ControlPoints.this.parent.activeOBJ,  ControlPoints.this.parent.objecttotal);
-                                                Undo undo=new Undo(ControlPoints.this.parent,p,d,ControlPoints.this.parent.activeOBJ.ss);
+                                                x=ControlPoints.this.parent.objecttotal-1;
+                                                while(ControlPoints.this.parent.activeOBJ!=null)
+                                                {
+                                                    if((ControlPoints.this.parent.Return[x][0]==ControlPoints.this.parent.activeOBJ.getX())&&(ControlPoints.this.parent.Return[x][1]==ControlPoints.this.parent.activeOBJ.getY()))
+                                                    {
+                                                        break;
+                                                    }
+                                                    else
+                                                    {
+                                                        x--;
+                                                    }
+                                                }
+                                                ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][0]=ControlPoints.this.parent.Return[x][0];
+                                                ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][1]=ControlPoints.this.parent.Return[x][1];
+                                                ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][2]=ControlPoints.this.parent.Return[x][2];
+                                                ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][3]=ControlPoints.this.parent.Return[x][3];
+                                                ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][4]=ControlPoints.this.parent.Return[x][4];
+                                                ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][5]=3;
+                                                ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][6]=x;
+                                                ControlPoints.this.parent.Return[x][0]=0;
+                                                ControlPoints.this.parent.Return[x][1]=0;
+                                                ControlPoints.this.parent.objecttotal++;
                                                 first=false;
                                             }
                                             if((d.height+(p1.y-p2.y)>=0)&&(d.width+(p1.x-p2.x)>=0))

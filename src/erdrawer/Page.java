@@ -15,23 +15,23 @@ import javax.swing.*;
 public class Page extends JPanel{
     ToolBar parent;
     Point p1,p2;
-    boolean first,First;
-    Vector<Line> Lines;
+    boolean first,First,b;
     Vector<OBJ> objects;
     OBJ activeOBJ,obj;
     ControlPoints cp;
+    int[][] Return;
     int objecttotal=0;
     Page(ToolBar p)
     {
         super();       
         parent = p;
         First=true;
-        Lines = new Vector<Line>();
         objects = new Vector<OBJ>();
         cp=new ControlPoints(Page.this);
         this.setLayout(null);
         p1=new Point();
         p2=new Point();
+        Return=new int[100][8];
         first=true;
         activeOBJ=new OBJ(Page.this,null);
         obj=new OBJ(Page.this,null);
@@ -65,15 +65,59 @@ public class Page extends JPanel{
                                         Graphics g=Page.this.getGraphics();
                                         if(Page.this.parent.parent.parent.status==Status.line)
                                         {
-                                            
-                                            Lines.add(new Line(p1,p2,Page.this.parent.color));
-                                            
-                                            if(first!=true)
+                                        if(first!=true)
+                                        {
+                                            Line line=new Line(Page.this.parent.color,Page.this);
+                                            if((p1.x<p2.x)&&(p1.y<p2.y))
                                             {
-                                                g.setPaintMode();
-                                                g.setColor(Page.this.parent.color);
-                                                g.drawLine(p1.x, p1.y, p2.x, p2.y);
+                                                line.setSize(p2.x-p1.x,p2.y-p1.y);
+                                                line.setLocation(p1.x, p1.y);
+                                                line.b1=true;
+                                                Page.this.Return[objecttotal][7]=1;
                                             }
+                                            else if((p1.x>p2.x)&&(p1.y>p2.y))
+                                            {
+                                                line.setSize(p1.x-p2.x,p1.y-p2.y);
+                                                line.setLocation(p2.x, p2.y);
+                                                line.b1=true;
+                                                Page.this.Return[objecttotal][7]=1;
+                                            }
+                                            else if((p1.x>p2.x)&&(p1.y<p2.y))
+                                            {
+                                                line.setSize(p1.x-p2.x,p2.y-p1.y);
+                                                line.setLocation(p2.x, p1.y);
+                                                line.b1=false;
+                                                Page.this.Return[objecttotal][7]=0;
+                                            }
+                                            else if((p1.x<p2.x)&&(p1.y>p2.y))
+                                            {
+                                                line.setSize(p2.x-p1.x,p1.y-p2.y);
+                                                line.setLocation(p1.x, p2.y);
+                                                line.b1=false;
+                                                Page.this.Return[objecttotal][7]=0;
+                                            }
+                                            Page.this.add(line);
+                                            objects.add(line);
+                                            Page.this.Return[objecttotal][0]=line.getX();
+                                            Page.this.Return[objecttotal][1]=line.getY();
+                                            Page.this.Return[objecttotal][2]=line.getWidth();
+                                            Page.this.Return[objecttotal][3]=line.getHeight();
+                                            Page.this.Return[objecttotal][4]=1;
+                                            Page.this.Return[objecttotal][5]=1;
+                                            
+                                            objecttotal++;
+                                            if(Page.this.activeOBJ!=null)
+                                            {
+                                                activeOBJ.status=Status.idle;
+                                            }
+                                            Page.this.activeOBJ=line;
+                                            if(activeOBJ!=null)
+                                            {
+                                                activeOBJ.status=Status.actived;
+                                            }
+                                            Page.this.repaint();
+                                            
+                                        }
                                         }
                                         else
                                         {
@@ -103,25 +147,14 @@ public class Page extends JPanel{
                                                 Entity.setLocation(p1.x, p2.y);
                                             }
                                             Page.this.add(Entity);
-                                            //objects.set(objecttotal,Entity);
-                                            if(objects.size()==0)
-                                            {
-                                                //ob[objecttotal]=Entity;
-                                                objects.insertElementAt(Entity, objecttotal);
-                                            }
-                                            else if(objects.size()<objecttotal+1)
-                                            {
-                                                objects.insertElementAt(Entity, objecttotal);
-                                            }
-                                            else
-                                            {
-                                                objects.setElementAt(Entity, objecttotal);
-                                                for(int i=objecttotal+1;i<objects.size();)
-                                                {
-                                                    objects.removeElementAt(i);
-                                                }
-                                            }
-                                            objecttotal=objecttotal+1;
+                                            objects.add(Entity);
+                                            Page.this.Return[objecttotal][0]=Entity.getX();
+                                            Page.this.Return[objecttotal][1]=Entity.getY();
+                                            Page.this.Return[objecttotal][2]=Entity.getWidth();
+                                            Page.this.Return[objecttotal][3]=Entity.getHeight();
+                                            Page.this.Return[objecttotal][4]=2;
+                                            Page.this.Return[objecttotal][5]=1;
+                                            objecttotal++;
                                             if(Page.this.activeOBJ!=null)
                                             {
                                                 activeOBJ.status=Status.idle;
@@ -156,23 +189,14 @@ public class Page extends JPanel{
                                                 Relation.setLocation(p1.x, p2.y);
                                             }
                                             Page.this.add(Relation);
-                                            if(objects.size()==0)
-                                            {
-                                                objects.insertElementAt(Relation, objecttotal);
-                                            }
-                                            else if(objects.size()<objecttotal+1)
-                                            {
-                                                objects.insertElementAt(Relation, objecttotal);
-                                            }
-                                            else
-                                            {
-                                                objects.setElementAt(Relation, objecttotal);
-                                                for(int i=objecttotal+1;i<objects.size();)
-                                                {
-                                                    objects.removeElementAt(i);
-                                                }
-                                            }
-                                            objecttotal=objecttotal+1;
+                                            objects.add(Relation);
+                                            Page.this.Return[objecttotal][0]=Relation.getX();
+                                            Page.this.Return[objecttotal][1]=Relation.getY();
+                                            Page.this.Return[objecttotal][2]=Relation.getWidth();
+                                            Page.this.Return[objecttotal][3]=Relation.getHeight();
+                                            Page.this.Return[objecttotal][4]=3;
+                                            Page.this.Return[objecttotal][5]=1;
+                                            objecttotal++;
                                             if(Page.this.activeOBJ!=null)
                                             {
                                                 activeOBJ.status=Status.idle;
@@ -185,50 +209,41 @@ public class Page extends JPanel{
                                         {
                                         if(first!=true)
                                         {
-                                            Attribute attributen=new Attribute(Page.this.parent.color,Page.this);
+                                            Attribute attribute=new Attribute(Page.this.parent.color,Page.this);
                                             if((p1.x<p2.x)&&(p1.y<p2.y))
                                             {
-                                                attributen.setSize(p2.x-p1.x,p2.y-p1.y);
-                                                attributen.setLocation(p1.x, p1.y);
+                                                attribute.setSize(p2.x-p1.x,p2.y-p1.y);
+                                                attribute.setLocation(p1.x, p1.y);
                                             }
                                             else if((p1.x>p2.x)&&(p1.y>p2.y))
                                             {
-                                                attributen.setSize(p1.x-p2.x,p1.y-p2.y);
-                                                attributen.setLocation(p2.x, p2.y);
+                                                attribute.setSize(p1.x-p2.x,p1.y-p2.y);
+                                                attribute.setLocation(p2.x, p2.y);
                                             }
                                             else if((p1.x>p2.x)&&(p1.y<p2.y))
                                             {
-                                                attributen.setSize(p1.x-p2.x,p2.y-p1.y);
-                                                attributen.setLocation(p2.x, p1.y);
+                                                attribute.setSize(p1.x-p2.x,p2.y-p1.y);
+                                                attribute.setLocation(p2.x, p1.y);
                                             }
                                             else if((p1.x<p2.x)&&(p1.y>p2.y))
                                             {
-                                                attributen.setSize(p2.x-p1.x,p1.y-p2.y);
-                                                attributen.setLocation(p1.x, p2.y);
+                                                attribute.setSize(p2.x-p1.x,p1.y-p2.y);
+                                                attribute.setLocation(p1.x, p2.y);
                                             }
-                                            Page.this.add(attributen);
-                                            if(objects.size()==0)
-                                            {
-                                                objects.insertElementAt(attributen, objecttotal);
-                                            }
-                                            else if(objects.size()<objecttotal+1)
-                                            {
-                                                objects.insertElementAt(attributen, objecttotal);
-                                            }
-                                            else
-                                            {
-                                                objects.setElementAt(attributen, objecttotal);
-                                                for(int i=objecttotal+1;i<objects.size();)
-                                                {
-                                                    objects.removeElementAt(i);
-                                                }
-                                            }
+                                            Page.this.add(attribute);
+                                            objects.add(attribute);
+                                            Page.this.Return[objecttotal][0]=attribute.getX();
+                                            Page.this.Return[objecttotal][1]=attribute.getY();
+                                            Page.this.Return[objecttotal][2]=attribute.getWidth();
+                                            Page.this.Return[objecttotal][3]=attribute.getHeight();
+                                            Page.this.Return[objecttotal][4]=4;
+                                            Page.this.Return[objecttotal][5]=1;
                                             objecttotal=objecttotal+1;
                                             if(Page.this.activeOBJ!=null)
                                             {
                                                 activeOBJ.status=Status.idle;
                                             }
-                                            Page.this.activeOBJ=attributen;
+                                            Page.this.activeOBJ=attribute;
                                             Page.this.repaint();
                                         }
                                         }         
@@ -315,12 +330,7 @@ public class Page extends JPanel{
     public void paint(Graphics g)
     {       
         super.paint(g);
-        for(Line i : Lines)
-        {
-            g.setColor(i.color);
-            g.drawLine(i.start.x, i.start.y, i.end.x, i.end.y);          
-        }
-        
+
         if(activeOBJ!=null)
         {
             cp.a();
@@ -338,6 +348,68 @@ public class Page extends JPanel{
         {
             cp.c(false);
         }
-        
+        if((Page.this.parent.parent.parent.re==Status.undo)&&(objecttotal>=0))
+        {
+            
+            
+            for(int i=0;i<Page.this.objecttotal;i++)
+            {
+                if((Return[i][5]==2)||(Return[i][5]==3))
+                {
+                    
+                }
+                else if((Return[i][0]==0)&&(Return[i][1]==0))
+                {
+                    
+                }
+                else if(Return[i][4]==1)
+                {
+                    Point p5=new Point();
+                    Dimension d5=new Dimension();
+                    p5.x=Return[i][0];
+                    p5.y=Return[i][1];
+                    d5.width=Return[i][2];
+                    d5.height=Return[i][3];
+                    Undo undo=new Undo(Page.this,p5,d5,Status.line);
+                    if(Return[i][7]==1)
+                        b=true;
+                    else if(Return[i][7]==0)
+                        b=false;
+                    undo.line(b);
+                }
+                else if(Return[i][4]==2)
+                {
+                    Point p5=new Point();
+                    Dimension d5=new Dimension();
+                    p5.x=Return[i][0];
+                    p5.y=Return[i][1];
+                    d5.width=Return[i][2];
+                    d5.height=Return[i][3];
+                    Undo undo=new Undo(Page.this,p5,d5,Status.rect);
+                }
+                else if(Return[i][4]==3)
+                {
+                    Point p5=new Point();
+                    Dimension d5=new Dimension();
+                    p5.x=Return[i][0];
+                    p5.y=Return[i][1];
+                    d5.width=Return[i][2];
+                    d5.height=Return[i][3];
+                    Undo undo=new Undo(Page.this,p5,d5,Status.diamond);
+                }
+                else if(Return[i][4]==4)
+                {
+                    Point p5=new Point();
+                    Dimension d5=new Dimension();
+                    p5.x=Return[i][0];
+                    p5.y=Return[i][1];
+                    d5.width=Return[i][2];
+                    d5.height=Return[i][3];
+                    Undo undo=new Undo(Page.this,p5,d5,Status.oval);
+                }
+            }
+            Page.this.repaint();
+            Page.this.parent.parent.parent.re=Status.free;
+        }
     }
 }

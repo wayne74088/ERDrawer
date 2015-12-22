@@ -14,8 +14,9 @@ public class OBJ extends Component
 {
     Page parent;
     Status status=Status.idle,ss;
-    boolean first;
+    boolean first,linestatus;
     Point p1,p2,m1,m2,s1;
+    int x;
     Dimension d1;
     OBJ(Page p,Status s)
     {
@@ -36,11 +37,28 @@ public class OBJ extends Component
                                             {
                                                 if(first==true)
                                                 {   
-                                                    s1.x=p1.x;
-                                                    s1.y=p1.y;
-                                                    d1=OBJ.this.getSize();
-                                                    OBJ.this.parent.objects.insertElementAt(OBJ.this, OBJ.this.parent.objecttotal);
-                                                    Undo undo= new Undo(parent,s1,d1,ss);
+                                                    x=OBJ.this.parent.objecttotal-1;
+                                                    while(OBJ.this.parent.activeOBJ!=null)
+                                                    {
+                                                        if((OBJ.this.parent.Return[x][0]==OBJ.this.getX())&&(OBJ.this.parent.Return[x][1]==OBJ.this.getY()))
+                                                        {
+                                                            break;
+                                                        }
+                                                        else
+                                                        {
+                                                            x--;
+                                                        }
+                                                    }
+                                                    OBJ.this.parent.Return[OBJ.this.parent.objecttotal][0]=OBJ.this.parent.Return[x][0];
+                                                    OBJ.this.parent.Return[OBJ.this.parent.objecttotal][1]=OBJ.this.parent.Return[x][1];
+                                                    OBJ.this.parent.Return[OBJ.this.parent.objecttotal][2]=OBJ.this.parent.Return[x][2];
+                                                    OBJ.this.parent.Return[OBJ.this.parent.objecttotal][3]=OBJ.this.parent.Return[x][3];
+                                                    OBJ.this.parent.Return[OBJ.this.parent.objecttotal][4]=OBJ.this.parent.Return[x][4];
+                                                    OBJ.this.parent.Return[OBJ.this.parent.objecttotal][5]=3;
+                                                    OBJ.this.parent.Return[OBJ.this.parent.objecttotal][6]=x;
+                                                    OBJ.this.parent.Return[x][1]=0;
+                                                    OBJ.this.parent.Return[x][2]=0;
+                                                    OBJ.this.parent.objecttotal++;
                                                     first=false;
                                                 }
                                                 m2.x=e.getXOnScreen();
@@ -75,19 +93,39 @@ public class OBJ extends Component
                                     {
                                         if(status==Status.actived)
                                         {
-                                            if(OBJ.this.parent.objects.size()<OBJ.this.parent.objecttotal+1)
+                                            OBJ.this.parent.Return[OBJ.this.parent.objecttotal][0]=OBJ.this.getX();
+                                            OBJ.this.parent.Return[OBJ.this.parent.objecttotal][1]=OBJ.this.getY();
+                                            OBJ.this.parent.Return[OBJ.this.parent.objecttotal][2]=OBJ.this.getWidth();
+                                            OBJ.this.parent.Return[OBJ.this.parent.objecttotal][3]=OBJ.this.getHeight();
+                                            if(ss==Status.line)
                                             {
-                                                OBJ.this.parent.objects.setElementAt( OBJ.this, OBJ.this.parent.objecttotal);
-                                            }
-                                            else 
-                                            {
-                                                OBJ.this.parent.objects.setElementAt( OBJ.this, OBJ.this.parent.objecttotal);
-                                                for(int i=OBJ.this.parent.objecttotal+1;i<OBJ.this.parent.objects.size();)
+                                                OBJ.this.parent.Return[OBJ.this.parent.objecttotal][4]=1;
+                                                if(linestatus==true)
                                                 {
-                                                    OBJ.this.parent.objects.remove(i);
+                                                    OBJ.this.parent.Return[OBJ.this.parent.objecttotal][7]=1;
+                                                }
+                                                else
+                                                {
+                                                    OBJ.this.parent.Return[OBJ.this.parent.objecttotal][7]=0;
                                                 }
                                             }
-                                            OBJ.this.parent.objecttotal=OBJ.this.parent.objecttotal+1;
+                                            else if(ss==Status.rect)
+                                            {
+                                                OBJ.this.parent.Return[OBJ.this.parent.objecttotal][4]=2;
+                                            }
+                                            else if(ss==Status.diamond)
+                                            {
+                                                OBJ.this.parent.Return[OBJ.this.parent.objecttotal][4]=3;
+                                            }
+                                            else if(ss==Status.oval)
+                                            {
+                                                OBJ.this.parent.Return[OBJ.this.parent.objecttotal][4]=4;
+                                            }
+                                            OBJ.this.parent.Return[OBJ.this.parent.objecttotal][5]=1;
+                                            OBJ.this.parent.Return[OBJ.this.parent.objecttotal][6]=x;
+                                            OBJ.this.parent.objecttotal++;
+                                            OBJ.this.parent.repaint();
+                                           
                                         }
                                     }
                                     
