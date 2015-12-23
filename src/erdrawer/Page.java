@@ -107,7 +107,6 @@ public class Page extends JPanel{
                                             Page.this.Return[objecttotal][8]=Page.this.parent.color.getRed();
                                             Page.this.Return[objecttotal][9]=Page.this.parent.color.getGreen();
                                             Page.this.Return[objecttotal][10]=Page.this.parent.color.getBlue();
-                                            objecttotal2++;
                                             objecttotal++;
                                             if(Page.this.activeOBJ!=null)
                                             {
@@ -160,7 +159,6 @@ public class Page extends JPanel{
                                             Page.this.Return[objecttotal][8]=Page.this.parent.color.getRed();
                                             Page.this.Return[objecttotal][9]=Page.this.parent.color.getGreen();
                                             Page.this.Return[objecttotal][10]=Page.this.parent.color.getBlue();
-                                            objecttotal2++;
                                             objecttotal++;
                                             if(Page.this.activeOBJ!=null)
                                             {
@@ -206,7 +204,6 @@ public class Page extends JPanel{
                                             Page.this.Return[objecttotal][8]=Page.this.parent.color.getRed();
                                             Page.this.Return[objecttotal][9]=Page.this.parent.color.getGreen();
                                             Page.this.Return[objecttotal][10]=Page.this.parent.color.getBlue();
-                                            objecttotal2++;
                                             objecttotal++;
                                             if(Page.this.activeOBJ!=null)
                                             {
@@ -252,7 +249,6 @@ public class Page extends JPanel{
                                             Page.this.Return[objecttotal][8]=Page.this.parent.color.getRed();
                                             Page.this.Return[objecttotal][9]=Page.this.parent.color.getGreen();
                                             Page.this.Return[objecttotal][10]=Page.this.parent.color.getBlue();
-                                            objecttotal2++;
                                             objecttotal=objecttotal+1;
                                             if(Page.this.activeOBJ!=null)
                                             {
@@ -365,7 +361,6 @@ public class Page extends JPanel{
         }
         if((Page.this.parent.parent.parent.re==Status.undo)&&(objecttotal>=0))
         {
-            
             
             for(int i=0;i<Page.this.objecttotal;i++)
             {

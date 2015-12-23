@@ -62,7 +62,6 @@ public class OBJ extends Component
                                                     OBJ.this.parent.Return[x][1]=0;
                                                     OBJ.this.parent.Return[x][2]=0;
                                                     OBJ.this.parent.objecttotal++;
-                                                    OBJ.this.parent.objecttotal2++;
                                                     first=false;
                                                 }
                                                 m2.x=e.getXOnScreen();
@@ -131,7 +130,6 @@ public class OBJ extends Component
                                             OBJ.this.parent.Return[OBJ.this.parent.objecttotal][9]=OBJ.this.parent.Return[x][9];
                                             OBJ.this.parent.Return[OBJ.this.parent.objecttotal][10]=OBJ.this.parent.Return[x][10];
                                             OBJ.this.parent.objecttotal++;
-                                            OBJ.this.parent.objecttotal2++;
                                             OBJ.this.parent.repaint();
                                            
                                         }
