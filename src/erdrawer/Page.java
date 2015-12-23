@@ -20,7 +20,7 @@ public class Page extends JPanel{
     OBJ activeOBJ,obj;
     ControlPoints cp;
     int[][] Return;
-    int objecttotal=0;
+    int objecttotal=0,objecttotal2=0;
     Page(ToolBar p)
     {
         super();       
@@ -31,12 +31,13 @@ public class Page extends JPanel{
         this.setLayout(null);
         p1=new Point();
         p2=new Point();
-        Return=new int[100][8];
+        Return=new int[100][11];
         first=true;
         activeOBJ=new OBJ(Page.this,null);
         obj=new OBJ(Page.this,null);
         activeOBJ=null;
         this.setBackground(Color.white); 
+        
         this.addMouseListener(new MouseAdapter()
                                 {
                                     
@@ -57,7 +58,6 @@ public class Page extends JPanel{
                                             p1.x=e.getX();
                                             p1.y=e.getY();  
                                         }
-                                        
                                     }
                                     
                                     public void mouseReleased(MouseEvent e)
@@ -104,7 +104,10 @@ public class Page extends JPanel{
                                             Page.this.Return[objecttotal][3]=line.getHeight();
                                             Page.this.Return[objecttotal][4]=1;
                                             Page.this.Return[objecttotal][5]=1;
-                                            
+                                            Page.this.Return[objecttotal][8]=Page.this.parent.color.getRed();
+                                            Page.this.Return[objecttotal][9]=Page.this.parent.color.getGreen();
+                                            Page.this.Return[objecttotal][10]=Page.this.parent.color.getBlue();
+                                            objecttotal2++;
                                             objecttotal++;
                                             if(Page.this.activeOBJ!=null)
                                             {
@@ -154,6 +157,10 @@ public class Page extends JPanel{
                                             Page.this.Return[objecttotal][3]=Entity.getHeight();
                                             Page.this.Return[objecttotal][4]=2;
                                             Page.this.Return[objecttotal][5]=1;
+                                            Page.this.Return[objecttotal][8]=Page.this.parent.color.getRed();
+                                            Page.this.Return[objecttotal][9]=Page.this.parent.color.getGreen();
+                                            Page.this.Return[objecttotal][10]=Page.this.parent.color.getBlue();
+                                            objecttotal2++;
                                             objecttotal++;
                                             if(Page.this.activeOBJ!=null)
                                             {
@@ -196,6 +203,10 @@ public class Page extends JPanel{
                                             Page.this.Return[objecttotal][3]=Relation.getHeight();
                                             Page.this.Return[objecttotal][4]=3;
                                             Page.this.Return[objecttotal][5]=1;
+                                            Page.this.Return[objecttotal][8]=Page.this.parent.color.getRed();
+                                            Page.this.Return[objecttotal][9]=Page.this.parent.color.getGreen();
+                                            Page.this.Return[objecttotal][10]=Page.this.parent.color.getBlue();
+                                            objecttotal2++;
                                             objecttotal++;
                                             if(Page.this.activeOBJ!=null)
                                             {
@@ -238,6 +249,10 @@ public class Page extends JPanel{
                                             Page.this.Return[objecttotal][3]=attribute.getHeight();
                                             Page.this.Return[objecttotal][4]=4;
                                             Page.this.Return[objecttotal][5]=1;
+                                            Page.this.Return[objecttotal][8]=Page.this.parent.color.getRed();
+                                            Page.this.Return[objecttotal][9]=Page.this.parent.color.getGreen();
+                                            Page.this.Return[objecttotal][10]=Page.this.parent.color.getBlue();
+                                            objecttotal2++;
                                             objecttotal=objecttotal+1;
                                             if(Page.this.activeOBJ!=null)
                                             {
@@ -370,7 +385,8 @@ public class Page extends JPanel{
                     p5.y=Return[i][1];
                     d5.width=Return[i][2];
                     d5.height=Return[i][3];
-                    Undo undo=new Undo(Page.this,p5,d5,Status.line);
+                    Color c=new Color(Return[i][8],Return[i][9],Return[i][10]);
+                    Undo undo=new Undo(Page.this,p5,d5,Status.line,c);
                     if(Return[i][7]==1)
                         b=true;
                     else if(Return[i][7]==0)
@@ -385,7 +401,8 @@ public class Page extends JPanel{
                     p5.y=Return[i][1];
                     d5.width=Return[i][2];
                     d5.height=Return[i][3];
-                    Undo undo=new Undo(Page.this,p5,d5,Status.rect);
+                    Color c=new Color(Return[i][8],Return[i][9],Return[i][10]);
+                    Undo undo=new Undo(Page.this,p5,d5,Status.rect,c);
                 }
                 else if(Return[i][4]==3)
                 {
@@ -395,7 +412,8 @@ public class Page extends JPanel{
                     p5.y=Return[i][1];
                     d5.width=Return[i][2];
                     d5.height=Return[i][3];
-                    Undo undo=new Undo(Page.this,p5,d5,Status.diamond);
+                    Color c=new Color(Return[i][8],Return[i][9],Return[i][10]);
+                    Undo undo=new Undo(Page.this,p5,d5,Status.diamond,c);
                 }
                 else if(Return[i][4]==4)
                 {
@@ -405,7 +423,8 @@ public class Page extends JPanel{
                     p5.y=Return[i][1];
                     d5.width=Return[i][2];
                     d5.height=Return[i][3];
-                    Undo undo=new Undo(Page.this,p5,d5,Status.oval);
+                    Color c=new Color(Return[i][8],Return[i][9],Return[i][10]);
+                    Undo undo=new Undo(Page.this,p5,d5,Status.oval,c);
                 }
             }
             Page.this.repaint();

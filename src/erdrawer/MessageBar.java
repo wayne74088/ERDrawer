@@ -6,26 +6,32 @@
 package erdrawer;
 import java.awt.*;
 import java.awt.event.*;
+import javax.swing.*;
+import javax.swing.event.*;
 /**
  *
  * @author Wayne
  */
-public class MessageBar extends Panel{
+public class MessageBar extends JPanel{
     MyWindow parent;
-    Label pageInfo,cursorInfo;
+    JLabel pageInfo,cursorInfo,colorInfo;
     MessageBar(MyWindow p)
     {
         super();
         this.setBackground(Color.LIGHT_GRAY);
         this.setLayout(new BorderLayout());
         parent=p;
-        cursorInfo=new Label("--NULL--");
-        this.add(cursorInfo,BorderLayout.WEST);
-        pageInfo=new Label("0/0");
+        colorInfo=new JLabel("     ");
+        colorInfo.setBackground(this.parent.tb.color);
+        colorInfo.setOpaque(true);
+        this.add(colorInfo,BorderLayout.WEST);
+        cursorInfo=new JLabel("--NULL--");
+        this.add(cursorInfo,BorderLayout.CENTER);
+        pageInfo=new JLabel("0/0");
         this.add(pageInfo,BorderLayout.EAST);
         
     }
-    void updateInfo(Page p)
+    void updateInfo(Page p,Color c)
     {
         if(pageInfo!=null)
         {
@@ -54,6 +60,10 @@ public class MessageBar extends Panel{
             {
                 cursorInfo.setText("--NULL--");
             }
+        }
+        if(c!=null)
+        {
+            colorInfo.setBackground(c);
         }
     }
 }

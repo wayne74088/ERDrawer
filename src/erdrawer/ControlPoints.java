@@ -99,6 +99,9 @@ public class ControlPoints {
                                     }
                                     ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][5]=1;
                                     ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][6]=x;
+                                    ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][8]=ControlPoints.this.parent.Return[x][8];
+                                    ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][9]=ControlPoints.this.parent.Return[x][9];
+                                    ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][10]=ControlPoints.this.parent.Return[x][10];
                                     ControlPoints.this.parent.objecttotal++;
                                     ControlPoints.this.parent.repaint();
                                 }
@@ -133,6 +136,9 @@ public class ControlPoints {
                                                 ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][4]=ControlPoints.this.parent.Return[x][4];
                                                 ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][5]=3;
                                                 ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][6]=x;
+                                                ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][8]=ControlPoints.this.parent.Return[x][8];
+                                                ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][9]=ControlPoints.this.parent.Return[x][9];
+                                                ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][10]=ControlPoints.this.parent.Return[x][10];
                                                 ControlPoints.this.parent.Return[x][0]=0;
                                                 ControlPoints.this.parent.Return[x][1]=0;
                                                 ControlPoints.this.parent.objecttotal++;
@@ -192,6 +198,9 @@ public class ControlPoints {
                                     }
                                     ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][5]=1;
                                     ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][6]=x;
+                                    ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][8]=ControlPoints.this.parent.Return[x][8];
+                                    ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][9]=ControlPoints.this.parent.Return[x][9];
+                                    ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][10]=ControlPoints.this.parent.Return[x][10];
                                     ControlPoints.this.parent.objecttotal++;
                                     ControlPoints.this.parent.repaint();
                                 }
@@ -225,6 +234,9 @@ public class ControlPoints {
                                                 ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][4]=ControlPoints.this.parent.Return[x][4];
                                                 ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][5]=3;
                                                 ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][6]=x;
+                                                ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][8]=ControlPoints.this.parent.Return[x][8];
+                                                ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][9]=ControlPoints.this.parent.Return[x][9];
+                                                ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][10]=ControlPoints.this.parent.Return[x][10];
                                                 ControlPoints.this.parent.Return[x][0]=0;
                                                 ControlPoints.this.parent.Return[x][1]=0;
                                                 ControlPoints.this.parent.objecttotal++;
@@ -285,6 +297,9 @@ public class ControlPoints {
                                     }
                                     ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][5]=1;
                                     ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][6]=x;
+                                    ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][8]=ControlPoints.this.parent.Return[x][8];
+                                    ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][9]=ControlPoints.this.parent.Return[x][9];
+                                    ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][10]=ControlPoints.this.parent.Return[x][10];
                                     ControlPoints.this.parent.objecttotal++;
                                     ControlPoints.this.parent.repaint();
                                 }
@@ -318,6 +333,9 @@ public class ControlPoints {
                                                 ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][4]=ControlPoints.this.parent.Return[x][4];
                                                 ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][5]=3;
                                                 ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][6]=x;
+                                                ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][8]=ControlPoints.this.parent.Return[x][8];
+                                                ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][9]=ControlPoints.this.parent.Return[x][9];
+                                                ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][10]=ControlPoints.this.parent.Return[x][10];
                                                 ControlPoints.this.parent.Return[x][0]=0;
                                                 ControlPoints.this.parent.Return[x][1]=0;
                                                 ControlPoints.this.parent.objecttotal++;
@@ -375,6 +393,9 @@ public class ControlPoints {
                                     }
                                     ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][5]=1;
                                     ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][6]=x;
+                                    ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][8]=ControlPoints.this.parent.Return[x][8];
+                                    ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][9]=ControlPoints.this.parent.Return[x][9];
+                                    ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][10]=ControlPoints.this.parent.Return[x][10];
                                     ControlPoints.this.parent.objecttotal++;
                                     ControlPoints.this.parent.repaint();
                                 }
@@ -408,6 +429,9 @@ public class ControlPoints {
                                                 ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][4]=ControlPoints.this.parent.Return[x][4];
                                                 ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][5]=3;
                                                 ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][6]=x;
+                                                ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][8]=ControlPoints.this.parent.Return[x][8];
+                                                ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][9]=ControlPoints.this.parent.Return[x][9];
+                                                ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][10]=ControlPoints.this.parent.Return[x][10];
                                                 ControlPoints.this.parent.Return[x][0]=0;
                                                 ControlPoints.this.parent.Return[x][1]=0;
                                                 ControlPoints.this.parent.objecttotal++;
@@ -466,6 +490,9 @@ public class ControlPoints {
                                     }
                                     ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][5]=1;
                                     ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][6]=x;
+                                    ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][8]=ControlPoints.this.parent.Return[x][8];
+                                    ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][9]=ControlPoints.this.parent.Return[x][9];
+                                    ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][10]=ControlPoints.this.parent.Return[x][10];
                                     ControlPoints.this.parent.objecttotal++;
                                     ControlPoints.this.parent.repaint();
                                 }
@@ -499,6 +526,9 @@ public class ControlPoints {
                                                 ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][4]=ControlPoints.this.parent.Return[x][4];
                                                 ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][5]=3;
                                                 ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][6]=x;
+                                                ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][8]=ControlPoints.this.parent.Return[x][8];
+                                                ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][9]=ControlPoints.this.parent.Return[x][9];
+                                                ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][10]=ControlPoints.this.parent.Return[x][10];
                                                 ControlPoints.this.parent.Return[x][0]=0;
                                                 ControlPoints.this.parent.Return[x][1]=0;
                                                 ControlPoints.this.parent.objecttotal++;
@@ -556,6 +586,9 @@ public class ControlPoints {
                                     }
                                     ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][5]=1;
                                     ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][6]=x;
+                                    ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][8]=ControlPoints.this.parent.Return[x][8];
+                                    ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][9]=ControlPoints.this.parent.Return[x][9];
+                                    ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][10]=ControlPoints.this.parent.Return[x][10];
                                     ControlPoints.this.parent.objecttotal++;
                                     ControlPoints.this.parent.repaint();
                                 }
@@ -589,6 +622,9 @@ public class ControlPoints {
                                                 ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][4]=ControlPoints.this.parent.Return[x][4];
                                                 ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][5]=3;
                                                 ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][6]=x;
+                                                ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][8]=ControlPoints.this.parent.Return[x][8];
+                                                ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][9]=ControlPoints.this.parent.Return[x][9];
+                                                ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][10]=ControlPoints.this.parent.Return[x][10];
                                                 ControlPoints.this.parent.Return[x][0]=0;
                                                 ControlPoints.this.parent.Return[x][1]=0;
                                                 ControlPoints.this.parent.objecttotal++;
@@ -649,6 +685,9 @@ public class ControlPoints {
                                     }
                                     ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][5]=1;
                                     ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][6]=x;
+                                    ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][8]=ControlPoints.this.parent.Return[x][8];
+                                    ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][9]=ControlPoints.this.parent.Return[x][9];
+                                    ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][10]=ControlPoints.this.parent.Return[x][10];
                                     ControlPoints.this.parent.objecttotal++;
                                     ControlPoints.this.parent.repaint();
                                 }
@@ -682,6 +721,9 @@ public class ControlPoints {
                                                 ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][4]=ControlPoints.this.parent.Return[x][4];
                                                 ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][5]=3;
                                                 ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][6]=x;
+                                                ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][8]=ControlPoints.this.parent.Return[x][8];
+                                                ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][9]=ControlPoints.this.parent.Return[x][9];
+                                                ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][10]=ControlPoints.this.parent.Return[x][10];
                                                 ControlPoints.this.parent.Return[x][0]=0;
                                                 ControlPoints.this.parent.Return[x][1]=0;
                                                 ControlPoints.this.parent.objecttotal++;
@@ -741,6 +783,9 @@ public class ControlPoints {
                                     }
                                     ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][5]=1;
                                     ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][6]=x;
+                                    ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][8]=ControlPoints.this.parent.Return[x][8];
+                                    ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][9]=ControlPoints.this.parent.Return[x][9];
+                                    ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][10]=ControlPoints.this.parent.Return[x][10];
                                     ControlPoints.this.parent.objecttotal++;
                                     ControlPoints.this.parent.repaint();
                                 }
@@ -774,6 +819,9 @@ public class ControlPoints {
                                                 ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][4]=ControlPoints.this.parent.Return[x][4];
                                                 ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][5]=3;
                                                 ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][6]=x;
+                                                ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][8]=ControlPoints.this.parent.Return[x][8];
+                                                ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][9]=ControlPoints.this.parent.Return[x][9];
+                                                ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][10]=ControlPoints.this.parent.Return[x][10];
                                                 ControlPoints.this.parent.Return[x][0]=0;
                                                 ControlPoints.this.parent.Return[x][1]=0;
                                                 ControlPoints.this.parent.objecttotal++;

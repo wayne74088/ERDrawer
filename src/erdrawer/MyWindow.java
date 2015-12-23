@@ -12,8 +12,9 @@ import javax.swing.event.*;
  *
  * @author User
  */
-public class MyWindow extends Frame{
+public class MyWindow extends JFrame{
     ToolBar tb;
+    LeftToolBar ltb;
     MessageBar mb;
     ERDrawer parent;
     MyWindow(ERDrawer p)
@@ -22,8 +23,8 @@ public class MyWindow extends Frame{
         parent=p;
         this.setSize(1024,800);
         this.setVisible(true);
+        this.setTitle("ERDrawer");
         this.setLocationRelativeTo(null);
-        this.setBackground(Color.gray);
         this.setLayout(new BorderLayout());
         
         this.addWindowListener(new WindowAdapter()
@@ -36,8 +37,10 @@ public class MyWindow extends Frame{
                               );
         
         tb=new ToolBar(this);
+        ltb=new LeftToolBar(this);
         mb=new MessageBar(this);
         this.add(tb,BorderLayout.NORTH);
+        this.add(ltb,BorderLayout.WEST);
         this.add(mb,BorderLayout.SOUTH);
         this.setVisible(true);
     }

@@ -14,14 +14,16 @@ public class Undo {
     Page parent;
     Point p1;
     Dimension d1;
-    Undo(Page p,Point p2,Dimension d,Status s)
+    Color c;
+    Undo(Page p,Point p2,Dimension d,Status s,Color cc)
     {
         parent = p;
         p1=p2;
         d1=d;
+        c=cc;
         if(s==Status.rect)
         {
-            Entityset entity=new Entityset(this.parent.parent.color,this.parent);
+            Entityset entity=new Entityset(c,this.parent);
             entity.setLocation(p1);
             entity.setSize(d1);
             entity.setVisible(true);
@@ -31,7 +33,7 @@ public class Undo {
         }
         else if(s==Status.diamond)
         {
-            Relationship relationship = new Relationship(this.parent.parent.color,this.parent);
+            Relationship relationship = new Relationship(c,this.parent);
             relationship.setLocation(p1);
             relationship.setSize(d1);
             relationship.setVisible(true);
@@ -41,7 +43,7 @@ public class Undo {
         }
         else if(s==Status.oval)
         {
-            Attribute attribute=new Attribute(this.parent.parent.color,this.parent);
+            Attribute attribute=new Attribute(c,this.parent);
             attribute.setLocation(p1);
             attribute.setSize(d1);
             attribute.setVisible(true);
@@ -49,14 +51,11 @@ public class Undo {
             Undo.this.parent.objects.add(attribute);
 
         }
-        else if(s==Status.line)
-        {
-            
-        }
+
     }
     void line(boolean b)
     {
-        Line line=new Line(this.parent.parent.color,this.parent);
+        Line line=new Line(c,this.parent);
         line.setLocation(p1);
         line.setSize(d1);
         /*if(Undo.this.parent.activeOBJ.linestatus==true)
