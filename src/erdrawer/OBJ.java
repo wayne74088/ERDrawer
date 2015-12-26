@@ -129,6 +129,11 @@ public class OBJ extends Component
                                             OBJ.this.parent.Return[OBJ.this.parent.objecttotal][8]=OBJ.this.parent.Return[x][8];
                                             OBJ.this.parent.Return[OBJ.this.parent.objecttotal][9]=OBJ.this.parent.Return[x][9];
                                             OBJ.this.parent.Return[OBJ.this.parent.objecttotal][10]=OBJ.this.parent.Return[x][10];
+                                            if(OBJ.this.parent.objecttotal2!=0)
+                                            {
+                                                OBJ.this.parent.objecttotal2=0;
+                                                OBJ.this.parent.parent.RedoBtn.setEnabled(false);
+                                            }
                                             OBJ.this.parent.objecttotal++;
                                             OBJ.this.parent.repaint();
                                            

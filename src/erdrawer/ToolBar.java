@@ -63,6 +63,10 @@ public class ToolBar extends JPanel{
                                             ToolBar.this.parent.mb.updateInfo(np,null);
                                             /* MyWindow.this.setVisible(false);
                                             MyWindow.this.setVisible(true);*/
+                                            if(ToolBar.this.parent.parent.curPage.objecttotal2==0)
+                                            {
+                                                ToolBar.this.RedoBtn.setEnabled(false);
+                                            }
                                             ToolBar.this.parent.revalidate();
                                         }
                                      }   
@@ -89,6 +93,14 @@ public class ToolBar extends JPanel{
                                                     ToolBar.this.parent.add(pp,BorderLayout.CENTER);
                                                     ToolBar.this.parent.mb.updateInfo(pp,null);
                                                     ToolBar.this.parent.parent.curPage=pp;
+                                                    if(ToolBar.this.parent.parent.curPage.objecttotal2==0)
+                                                    {
+                                                        ToolBar.this.RedoBtn.setEnabled(false);
+                                                    }
+                                                    else if(ToolBar.this.parent.parent.curPage.objecttotal2!=0)
+                                                    {
+                                                            ToolBar.this.RedoBtn.setEnabled(true);
+                                                    }
                                                     ToolBar.this.parent.parent.curPage.repaint();
                                                 }
                                             }
@@ -115,6 +127,14 @@ public class ToolBar extends JPanel{
                                                     ToolBar.this.parent.add(np);
                                                     ToolBar.this.parent.mb.updateInfo(np,null);
                                                     ToolBar.this.parent.parent.curPage=np;
+                                                    if(ToolBar.this.parent.parent.curPage.objecttotal2==0)
+                                                    {
+                                                        ToolBar.this.RedoBtn.setEnabled(false);
+                                                    }
+                                                    else if(ToolBar.this.parent.parent.curPage.objecttotal2!=0)
+                                                    {
+                                                            ToolBar.this.RedoBtn.setEnabled(true);
+                                                    }
                                                     ToolBar.this.parent.parent.curPage.repaint();
                                                 }
                                             }
@@ -137,6 +157,14 @@ public class ToolBar extends JPanel{
                                                     ToolBar.this.parent.add(fp,BorderLayout.CENTER);
                                                     ToolBar.this.parent.mb.updateInfo(fp,null);
                                                     ToolBar.this.parent.parent.curPage=fp;
+                                                    if(ToolBar.this.parent.parent.curPage.objecttotal2==0)
+                                                    {
+                                                        ToolBar.this.RedoBtn.setEnabled(false);
+                                                    }
+                                                    else if(ToolBar.this.parent.parent.curPage.objecttotal2!=0)
+                                                    {
+                                                            ToolBar.this.RedoBtn.setEnabled(true);
+                                                    }
                                                     ToolBar.this.parent.parent.curPage.repaint();
                                                 }
                                             }
@@ -158,6 +186,14 @@ public class ToolBar extends JPanel{
                                                     Page lp=ToolBar.this.parent.parent.pages.elementAt(loc1);
                                                     ToolBar.this.parent.add(lp,BorderLayout.CENTER);
                                                     ToolBar.this.parent.parent.curPage=lp;
+                                                    if(ToolBar.this.parent.parent.curPage.objecttotal2==0)
+                                                    {
+                                                        ToolBar.this.RedoBtn.setEnabled(false);
+                                                    }
+                                                    else if(ToolBar.this.parent.parent.curPage.objecttotal2!=0)
+                                                    {
+                                                            ToolBar.this.RedoBtn.setEnabled(true);
+                                                    }
                                                     ToolBar.this.parent.mb.updateInfo(lp,null);
                                                     ToolBar.this.parent.parent.curPage.repaint();
                                                 }
@@ -218,7 +254,11 @@ public class ToolBar extends JPanel{
                                                         ToolBar.this.parent.parent.curPage.Return[ToolBar.this.parent.parent.curPage.objecttotal][8]= ToolBar.this.parent.parent.curPage.Return[x][8];
                                                         ToolBar.this.parent.parent.curPage.Return[ToolBar.this.parent.parent.curPage.objecttotal][9]= ToolBar.this.parent.parent.curPage.Return[x][9];
                                                         ToolBar.this.parent.parent.curPage.Return[ToolBar.this.parent.parent.curPage.objecttotal][10]= ToolBar.this.parent.parent.curPage.Return[x][10];
-                                                        
+                                                        if(ToolBar.this.parent.parent.curPage.objecttotal2!=0)
+                                                        {
+                                                            ToolBar.this.parent.parent.curPage.objecttotal2=0;
+                                                            ToolBar.this.RedoBtn.setEnabled(false);
+                                                        }
                                                         ToolBar.this.parent.parent.curPage.Return[x][0]=0;
                                                         ToolBar.this.parent.parent.curPage.Return[x][1]=0;
                                                         //ToolBar.this.parent.parent.curPage.objects.add(ToolBar.this.parent.parent.curPage.activeOBJ);
@@ -244,6 +284,10 @@ public class ToolBar extends JPanel{
                                                 ToolBar.this.parent.parent.re=Status.undo;
                                                 ToolBar.this.parent.parent.curPage.objecttotal--;
                                                 ToolBar.this.parent.parent.curPage.objecttotal2++;
+                                                if(ToolBar.this.parent.parent.curPage.objecttotal2!=0)
+                                                {
+                                                    ToolBar.this.RedoBtn.setEnabled(true);
+                                                }
                                                 int b=ToolBar.this.parent.parent.curPage.objects.size();
                                                 
                                                 if(ToolBar.this.parent.parent.curPage.Return[ToolBar.this.parent.parent.curPage.objecttotal][5]==2)
@@ -285,7 +329,7 @@ public class ToolBar extends JPanel{
                                             }
                                         }
                                     });
-
+        ToolBar.this.RedoBtn.setEnabled(false);
         RedoBtn.addMouseListener(new MouseAdapter()
                                     {
                                         public void mouseClicked(MouseEvent e)
@@ -294,6 +338,7 @@ public class ToolBar extends JPanel{
                                             {
                                                 
                                                 ToolBar.this.parent.parent.curPage.objecttotal2--;
+                                                
                                                 int b=ToolBar.this.parent.parent.curPage.objects.size();
                                                 if(ToolBar.this.parent.parent.curPage.Return[ToolBar.this.parent.parent.curPage.objecttotal][5]==2)
                                                 {
@@ -330,7 +375,12 @@ public class ToolBar extends JPanel{
                                                 ToolBar.this.parent.parent.curPage.activeOBJ=null;
                                                 ToolBar.this.parent.parent.re=Status.undo;
                                                 ToolBar.this.parent.parent.curPage.objecttotal++;
+                                                if(ToolBar.this.parent.parent.curPage.objecttotal2==0)
+                                                {
+                                                    ToolBar.this.RedoBtn.setEnabled(false);
+                                                }
                                                 ToolBar.this.parent.parent.curPage.repaint();
+                                                
                                             }
                                         }
                                     });

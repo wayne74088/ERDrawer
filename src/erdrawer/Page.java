@@ -107,6 +107,11 @@ public class Page extends JPanel{
                                             Page.this.Return[objecttotal][8]=Page.this.parent.color.getRed();
                                             Page.this.Return[objecttotal][9]=Page.this.parent.color.getGreen();
                                             Page.this.Return[objecttotal][10]=Page.this.parent.color.getBlue();
+                                            if(objecttotal2!=0)
+                                            {
+                                                objecttotal2=0;
+                                                Page.this.parent.RedoBtn.setEnabled(false);
+                                            }
                                             objecttotal++;
                                             if(Page.this.activeOBJ!=null)
                                             {
@@ -159,6 +164,11 @@ public class Page extends JPanel{
                                             Page.this.Return[objecttotal][8]=Page.this.parent.color.getRed();
                                             Page.this.Return[objecttotal][9]=Page.this.parent.color.getGreen();
                                             Page.this.Return[objecttotal][10]=Page.this.parent.color.getBlue();
+                                            if(objecttotal2!=0)
+                                            {
+                                                objecttotal2=0;
+                                                Page.this.parent.RedoBtn.setEnabled(false);
+                                            }
                                             objecttotal++;
                                             if(Page.this.activeOBJ!=null)
                                             {
@@ -204,6 +214,11 @@ public class Page extends JPanel{
                                             Page.this.Return[objecttotal][8]=Page.this.parent.color.getRed();
                                             Page.this.Return[objecttotal][9]=Page.this.parent.color.getGreen();
                                             Page.this.Return[objecttotal][10]=Page.this.parent.color.getBlue();
+                                            if(objecttotal2!=0)
+                                            {
+                                                objecttotal2=0;
+                                                Page.this.parent.RedoBtn.setEnabled(false);
+                                            }
                                             objecttotal++;
                                             if(Page.this.activeOBJ!=null)
                                             {
@@ -249,6 +264,11 @@ public class Page extends JPanel{
                                             Page.this.Return[objecttotal][8]=Page.this.parent.color.getRed();
                                             Page.this.Return[objecttotal][9]=Page.this.parent.color.getGreen();
                                             Page.this.Return[objecttotal][10]=Page.this.parent.color.getBlue();
+                                            if(objecttotal2!=0)
+                                            {
+                                                objecttotal2=0;
+                                                Page.this.parent.RedoBtn.setEnabled(false);
+                                            }
                                             objecttotal=objecttotal+1;
                                             if(Page.this.activeOBJ!=null)
                                             {

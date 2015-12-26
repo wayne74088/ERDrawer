@@ -102,6 +102,11 @@ public class ControlPoints {
                                     ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][8]=ControlPoints.this.parent.Return[x][8];
                                     ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][9]=ControlPoints.this.parent.Return[x][9];
                                     ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][10]=ControlPoints.this.parent.Return[x][10];
+                                    if(ControlPoints.this.parent.objecttotal2!=0)
+                                    {
+                                        ControlPoints.this.parent.objecttotal2=0;
+                                        ControlPoints.this.parent.parent.RedoBtn.setEnabled(false);
+                                    }
                                     ControlPoints.this.parent.objecttotal++;
                                     ControlPoints.this.parent.repaint();
                                 }
@@ -201,6 +206,11 @@ public class ControlPoints {
                                     ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][8]=ControlPoints.this.parent.Return[x][8];
                                     ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][9]=ControlPoints.this.parent.Return[x][9];
                                     ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][10]=ControlPoints.this.parent.Return[x][10];
+                                    if(ControlPoints.this.parent.objecttotal2!=0)
+                                    {
+                                        ControlPoints.this.parent.objecttotal2=0;
+                                        ControlPoints.this.parent.parent.RedoBtn.setEnabled(false);
+                                    }
                                     ControlPoints.this.parent.objecttotal++;
                                     ControlPoints.this.parent.repaint();
                                 }
@@ -300,6 +310,11 @@ public class ControlPoints {
                                     ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][8]=ControlPoints.this.parent.Return[x][8];
                                     ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][9]=ControlPoints.this.parent.Return[x][9];
                                     ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][10]=ControlPoints.this.parent.Return[x][10];
+                                    if(ControlPoints.this.parent.objecttotal2!=0)
+                                    {
+                                        ControlPoints.this.parent.objecttotal2=0;
+                                        ControlPoints.this.parent.parent.RedoBtn.setEnabled(false);
+                                    }
                                     ControlPoints.this.parent.objecttotal++;
                                     ControlPoints.this.parent.repaint();
                                 }
@@ -396,6 +411,11 @@ public class ControlPoints {
                                     ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][8]=ControlPoints.this.parent.Return[x][8];
                                     ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][9]=ControlPoints.this.parent.Return[x][9];
                                     ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][10]=ControlPoints.this.parent.Return[x][10];
+                                    if(ControlPoints.this.parent.objecttotal2!=0)
+                                    {
+                                        ControlPoints.this.parent.objecttotal2=0;
+                                        ControlPoints.this.parent.parent.RedoBtn.setEnabled(false);
+                                    }
                                     ControlPoints.this.parent.objecttotal++;
                                     ControlPoints.this.parent.repaint();
                                 }
@@ -493,6 +513,11 @@ public class ControlPoints {
                                     ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][8]=ControlPoints.this.parent.Return[x][8];
                                     ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][9]=ControlPoints.this.parent.Return[x][9];
                                     ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][10]=ControlPoints.this.parent.Return[x][10];
+                                    if(ControlPoints.this.parent.objecttotal2!=0)
+                                    {
+                                        ControlPoints.this.parent.objecttotal2=0;
+                                        ControlPoints.this.parent.parent.RedoBtn.setEnabled(false);
+                                    }
                                     ControlPoints.this.parent.objecttotal++;
                                     ControlPoints.this.parent.repaint();
                                 }
@@ -589,6 +614,11 @@ public class ControlPoints {
                                     ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][8]=ControlPoints.this.parent.Return[x][8];
                                     ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][9]=ControlPoints.this.parent.Return[x][9];
                                     ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][10]=ControlPoints.this.parent.Return[x][10];
+                                    if(ControlPoints.this.parent.objecttotal2!=0)
+                                    {
+                                        ControlPoints.this.parent.objecttotal2=0;
+                                        ControlPoints.this.parent.parent.RedoBtn.setEnabled(false);
+                                    }
                                     ControlPoints.this.parent.objecttotal++;
                                     ControlPoints.this.parent.repaint();
                                 }
@@ -688,6 +718,11 @@ public class ControlPoints {
                                     ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][8]=ControlPoints.this.parent.Return[x][8];
                                     ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][9]=ControlPoints.this.parent.Return[x][9];
                                     ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][10]=ControlPoints.this.parent.Return[x][10];
+                                    if(ControlPoints.this.parent.objecttotal2!=0)
+                                    {
+                                        ControlPoints.this.parent.objecttotal2=0;
+                                        ControlPoints.this.parent.parent.RedoBtn.setEnabled(false);
+                                    }
                                     ControlPoints.this.parent.objecttotal++;
                                     ControlPoints.this.parent.repaint();
                                 }
@@ -786,6 +821,11 @@ public class ControlPoints {
                                     ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][8]=ControlPoints.this.parent.Return[x][8];
                                     ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][9]=ControlPoints.this.parent.Return[x][9];
                                     ControlPoints.this.parent.Return[ControlPoints.this.parent.objecttotal][10]=ControlPoints.this.parent.Return[x][10];
+                                    if(ControlPoints.this.parent.objecttotal2!=0)
+                                    {
+                                        ControlPoints.this.parent.objecttotal2=0;
+                                        ControlPoints.this.parent.parent.RedoBtn.setEnabled(false);
+                                    }
                                     ControlPoints.this.parent.objecttotal++;
                                     ControlPoints.this.parent.repaint();
                                 }
